@@ -1,0 +1,347 @@
+@charset "UTF-8";
+
+/* ==============================
+   Estilo Geral
+============================== */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    height: auto;
+    overflow-y: auto;
+}
+
+header {
+    background-color: #d4ff00;
+    padding: 20px 0;
+}
+
+header .nuvem {
+    padding: 20px;
+    background-color: white;
+    margin: 0 auto;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.6em;
+    white-space: nowrap;
+    justify-content: space-between;
+    gap: 10px;
+    padding-right: 20px;
+}
+
+header .info {
+    display: flex;
+    gap: 20px;
+    font-size: 0.95em;
+}
+
+header .info p {
+    margin: 0;
+    padding: 0;
+    border-left: 2px solid #d4ff00;
+    cursor: pointer;
+    transition: color 0.3s;
+    padding-left: 10px;
+}
+
+header .info p:hover {
+    color: #ffffff;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+.botoes-header {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    display: none;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    padding: 5px 10px;
+}
+
+.dropdown.active {
+    display: block;
+}
+
+.logout-btn {
+    background-color: #007a4d;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.logout-btn:hover {
+    background-color: #005f3a;
+}
+
+/* ==============================
+   Filtro e Busca
+============================== */
+.container-solicitacoes {
+    padding: 20px;
+}
+
+#pesquisa {
+    padding: 8px;
+    width: 250px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+.botoes-filtros {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.botoes-filtros .filtro {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #e5e5e5;
+}
+
+.botoes-filtros .filtro.ativo {
+    background-color: #d4ff00;
+    font-weight: bold;
+}
+
+
+/* ==============================
+   Cards de Solicitações
+============================== */
+.lista-solicitacoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card-solicitacao {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-solicitacao h3 {
+    margin-bottom: 10px;
+}
+
+.card-solicitacao p {
+    margin-bottom: 5px;
+}
+
+.badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: white;
+    font-size: 12px;
+}
+
+.andamento {
+    background-color: orange;
+}
+
+.concluido {
+    background-color: green;
+}
+
+
+/* ==============================
+   Botões dos Cards
+============================== */
+.botoes-card {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.botoes-card button {
+    flex: 1;
+    padding: 6px 8px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-cancelar {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.btn-cancelar:hover {
+    background-color: #cc0000;
+}
+
+
+/* ==============================
+   Esconder Elementos
+============================== */
+.escondido {
+    display: none !important;
+}
+
+
+/* ==============================
+   Responsividade
+============================== */
+
+/* Telas Grandes (Desktops) */
+@media (min-width: 1200px) {
+    .nuvem {
+        max-width: 1100px;
+    }
+}
+
+/* Telas Intermediárias */
+@media (min-width: 769px) and (max-width: 1199px) {
+    header .nuvem {
+        max-width: 95%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .botoes-filtros {
+        gap: 10px;
+    }
+
+    #pesquisa {
+        width: 60%;
+    }
+
+    .lista-solicitacoes {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 15px;
+    }
+}
+
+/* Telas Pequenas (Celulares) */
+@media (max-width: 768px) {
+    header .nuvem {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    
+        header .logo {
+            justify-content: center;
+        }
+    
+        header h1 {
+            font-size: 1.3em;
+        }
+    
+        header .info {
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+    
+        .botoes-header {
+            position: static;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+    #pesquisa {
+        width: 100%;
+    }
+
+    .botoes-filtros {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .botoes-filtros .filtro {
+        width: 100%;
+        text-align: center;
+    }
+
+    .lista-solicitacoes {
+        grid-template-columns: 1fr;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .card-solicitacao {
+        padding: 15px;
+    }
+
+    .botoes-card {
+        flex-direction: column;
+    }
+
+    .botoes-card button {
+        width: 100%;
+    }
+
+    .logout-btn {
+        padding: 8px 0;
+    }
+}

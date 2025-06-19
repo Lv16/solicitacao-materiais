@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'assets/embarque.css' %}" />
+    <link rel="shortcut icon" href="{% static 'assets/img/icon.png' %}" type="image/png" />
+    <title>Solicitação de Material</title>
+</head>
+
+<body>
+    <header>
+        <div class="nuvem">
+            <div class="logo">
+                <picture>
+                    <source srcset="{% static 'assets/img/logo_grupo_mobile.png' %}" type="image/png"
+                        media="(max-width: 600px)" />
+                    <source srcset="{% static 'assets/img/logo_grupo_tablet.png' %}" type="image/png"
+                        media="(max-width: 900px)" />
+                    <img src="{% static 'assets/img/logo_grupo.png' %}" alt="logo" />
+                </picture>
+            </div>
+            <h1>Solicitação de Material</h1>
+            <div class="info">
+                <a href="{% url 'solicitacoes' %}" rel="next" target="_self">
+                    <p>Minhas Solicitações</p>
+                </a>
+            </div>
+        </div>
+        <div class="botoes-header">
+            <div class="user-menu">
+                <img src="{% static 'assets/img/profile.png' %}" alt="Usuário" class="user-img"
+                    onclick="toggleMenu()" />
+                <div class="dropdown" id="dropdown">
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="materiais">
+            <h2>Materiais Disponíveis</h2>
+            <div class="barra-pesquisa">
+                <input type="text" placeholder="Ex: Câmera Kodak" class="pesquisar" />
+                <button class="btn-pesquisar">Pesquisar</button>
+                <button class="btn-limpar">Limpar Busca</button>
+            </div>
+
+            <div class="filtro-tipo">
+                <label for="tipo"></label>
+                <select id="tipo" name="tipo" class="select-tipo">
+                    <option value="" disabled selected>Selecione um material</option>
+                    {% for equipamento in equipamentos %}
+                    <option value="{{ equipamento.slug }}">{{ equipamento.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="disponiveis">
+        <div class="lista_materiais">
+            {% for equipamento in equipamentos %}
+            <div class="{{ equipamento.slug }}">
+                <img src="{{ equipamento.imagem_url }}" alt="{{ equipamento.nome }}" />
+                <h3>{{ equipamento.nome }}</h3>
+                <p>Disponível: {{ equipamento.quantidade_disponivel }} unidades</p>
+                <button class="btn-solicitar" data-tipo="{{ equipamento.slug }}">Solicitar</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="modal-solicitacao" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-equipamento"></h2>
+
+            <div class="campo-preenchimento">
+                <label><strong>Número de série:</strong></label>
+                <span id="modal-serial"></span>
+            </div>
+            <div class="campo-preenchimento">
+                <label><strong>Itens incluídos:</strong></label>
+                <span id="modal-itens"></span>
+            </div>
+            <div class="campo-preenchimento">
+                <label><strong>Dimensões:</strong></label>
+                <span class="modal-dimensao"></span>
+            </div>
+
+            <form id="form-solicitacao" method="POST" action="{% url 'solicitar_material' %}">
+                {% csrf_token %}
+                <div class="campo-preenchimento">
+                    <label for="embarcacao">Embarcação</label>
+                    <input type="text" id="embarcacao" name="embarcacao" placeholder="Digite a Embarcação" required />
+                </div>
+                <div class="campo-preenchimento">
+                    <label for="data">Data do embarque</label>
+                    <input type="date" id="data" name="data" required />
+                </div>
+                <div class="campo-preenchimento">
+                    <label for="supervisor">Supervisor Responsável</label>
+                    <input type="text" id="supervisor" name="supervisor" placeholder="Ex: Carolina Machado" required />
+                </div>
+                <div class="botoes-modal">
+                    <button type="submit" class="btn-confirmar">✅Confirmar</button>
+                    <button type="button" class="btn-cancelar">❌Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'assets/embarque.js' %}"></script>
+</body>
+
+</html>

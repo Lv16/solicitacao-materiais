@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'assets/solicitacoes.css' %}" />
+    <link rel="shortcut icon" href="{% static 'assets/img/icon.png' %}" type="image/png" />
+    <title>Minhas Solicitações</title>
+</head>
+
+<body>
+    <header>
+        <div class="nuvem">
+            <div class="logo">
+                <picture>
+                    <source srcset="{% static 'assets/img/logo_grupo_mobile.png' %}" type="image/png"
+                        media="(max-width: 600px)" />
+                    <source srcset="{% static 'assets/img/logo_grupo_tablet.png' %}" type="image/png"
+                        media="(max-width: 900px)" />
+                    <img src="{% static 'assets/img/logo_grupo.png' %}" alt="logo" />
+                </picture>
+            </div>
+            <h1>Minhas Solicitações</h1>
+            <div class="info">
+                <a href="{% url 'solicitar_material' %}" rel="back" target="_top">
+                    <p>Nova solicitação</p>
+                </a>
+            </div>
+        </div>
+        <div class="botoes-header">
+            <div class="user-menu">
+                <img src="{% static 'assets/img/profile.png' %}" alt="Usuário" class="user-img"
+                    onclick="toggleMenu()" />
+                <div class="dropdown" id="dropdown">
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-solicitacoes">
+        <div class="filtros"></div>
+        <input type="text" id="pesquisa" placeholder="Buscar por embarcação" />
+        <div class="botoes-filtros">
+            <button class="filtro ativo" data-status="todos">Todos</button>
+            <button class="filtro" data-status="andamento">Em andamento</button>
+            <button class="filtro" data-status="concluido">Concluído</button>
+        </div>
+    </div>
+
+    <div class="lista-solicitacoes">
+        {% if solicitacoes %}
+        {% for solicitacao in solicitacoes %}
+        <div class="card-solicitacao" data-status="{{ solicitacao.status }}">
+            <h3>{{ solicitacao.equipamento_nome }}</h3>
+            <p><strong>Embarcação:</strong> {{ solicitacao.embarcacao }}</p>
+            <p><strong>Data:</strong> {{ solicitacao.data_embarque|date:"d/m/Y" }}</p>
+            <p><strong>Supervisor:</strong> {{ solicitacao.supervisor }}</p>
+            <p><strong>Status:</strong>
+                <span class="badge {{ solicitacao.status }}"></span>
+            </p>
+            <div class="botoes-card">
+                <form method="POST" action="{% url 'cancelar_solicitacao' solicitacao.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-cancelar">Cancelar</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Nenhuma solicitação encontrada.</p>
+        {% endif %}
+    </div>
+
+    <script src="{% static 'assets/solicitacoes.js' %}"></script>
+</body>
+
+</html>
