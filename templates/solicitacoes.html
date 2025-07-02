@@ -36,41 +36,44 @@
         </div>
     </header>
 
-    <div class="container-solicitacoes">
-        <div class="filtros"></div>
-        <input type="text" id="pesquisa" placeholder="Buscar por embarcação" />
-        <div class="botoes-filtros">
-            <button class="filtro ativo" data-status="todos">Todos</button>
-            <button class="filtro" data-status="andamento">Em andamento</button>
-            <button class="filtro" data-status="concluido">Concluído</button>
-        </div>
-    </div>
-
-    <div class="lista-solicitacoes">
-        <div class="card-solicitacao" data-status="andamento">
-            <h3>Câmera Kodak Pixpro</h3>
-            <p><strong>Embarcação:</strong> Norsul Vitória</p>
-            <p><strong>Data:</strong> 25/06/2025</p>
-            <p><strong>Supervisor:</strong> Carolina Machado</p>
-            <p><strong>Status:</strong> <span class="badge andamento">Em andamento</span></p>
-            <div class="botoes-card">
-                <button class="btn-cancelar">Cancelar</button>
+    <main>
+        <div class="container-solicitacoes">
+            <div class="filtros"></div>
+            <input type="text" id="pesquisa" placeholder="Buscar por embarcação" />
+            <div class="botoes-filtros">
+                <button class="filtro ativo" data-status="todos">Todos</button>
+                <button class="filtro" data-status="andamento">Em andamento</button>
+                <button class="filtro" data-status="concluido">Concluído</button>
             </div>
         </div>
-
-        <div class="card-solicitacao" data-status="concluido">
-            <h3>Tablet EX</h3>
-            <p><strong>Embarcação:</strong> Norsul Santos</p>
-            <p><strong>Data:</strong> 20/06/2025</p>
-            <p><strong>Supervisor:</strong> João Ferreira</p>
-            <p><strong>Status:</strong> <span class="badge concluido">Concluído</span></p>
-            <div class="botoes-card">
-                <button class="btn-cancelar">Cancelar</button>
+        <div class="lista-solicitacoes">
+            <div class="card-solicitacao" data-status="andamento">
+                <h3>Câmera Kodak Pixpro</h3>
+                <p><strong>Embarcação:</strong> Norsul Vitória</p>
+                <p><strong>Data:</strong> 25/06/2025</p>
+                <p><strong>Supervisor:</strong> Carolina Machado</p>
+                <p><strong>Status:</strong> <span class="badge andamento">Em andamento</span></p>
+                <div class="botoes-card">
+                    <button class="btn-cancelar">Cancelar</button>
+                </div>
+            </div>
+            <div class="card-solicitacao" data-status="concluido">
+                <h3>Tablet EX</h3>
+                <p><strong>Embarcação:</strong> Norsul Santos</p>
+                <p><strong>Data:</strong> 20/06/2025</p>
+                <p><strong>Supervisor:</strong> João Ferreira</p>
+                <p><strong>Status:</strong> <span class="badge concluido">Concluído</span></p>
+                <div class="botoes-card">
+                    <button class="btn-cancelar">Cancelar</button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <script src="../assets/solicitacoes.js"></script>
+        <script src="../assets/solicitacoes.js"></script>
+    </main>
+    <footer>
+        <p>© 2023 Ambipar Group. Todos os direitos reservados.</p>
+    </footer>
 </body>
+<script src="../assets/solicitacoes.js"></script>
 
 </html>
