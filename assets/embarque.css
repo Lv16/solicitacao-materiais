@@ -3,12 +3,19 @@
 /* ==============================
    Estilo Geral
 ============================== */
-body {
+html,body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: #f5f5f5;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
 }
 
 header {
@@ -46,7 +53,6 @@ header h1 {
     gap: 10px;
     padding-right: 20px;
     text-align: center;
-    text-decoration: underline;
 }
 
 header .info {
@@ -138,11 +144,13 @@ a {
     max-width: 900px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: #d4ff00 2px solid;
 }
 
 .materiais h2 {
     margin-top: 0;
     color: black;
+    text-align: center;
 }
 
 .barra-pesquisa {
@@ -442,6 +450,16 @@ a {
     background-color: #d32f2f;
 }
 
+footer {
+    background-color: #d4ff00;
+    color: #212121;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: 9px 0;
+    white-space: nowrap;
+}
+
 
 /* ==============================
    Responsividade
@@ -533,6 +551,11 @@ a {
     .logout-btn {
         padding: 8px 12px;
     }
+    footer {
+        padding: 5px 0;
+        font-size: 0.8em;
+        white-space: nowrap;
+    }
 }
 
 /* ========== J7 DA SUAYANE (até 480px) ========== */
@@ -568,4 +591,12 @@ a {
         padding: 15px;
         max-width: 90%;
     }
+
+    footer {
+        padding: 3px 0;
+        font-size: 0.5em;
+        white-space: nowrap;
+        
+    }
 }
+

@@ -36,12 +36,12 @@
             </div>
         </div>
     </header>
-
-    <div class="container">
-        <div class="materiais">
-            <h2>Materiais Disponíveis</h2>
-            <div class="barra-pesquisa">
-                <input type="text" placeholder="Ex: Câmera Kodak" class="pesquisar" />
+    <main>
+        <div class="container">
+            <div class="materiais">
+                <h2>Materiais Disponíveis</h2>
+                <div class="barra-pesquisa">
+                    <input type="text" placeholder="Ex: Câmera Kodak" class="pesquisar" />
                 <button class="btn-pesquisar"><p>Pesquisar</p></button>
                 <button class="btn-limpar"><p>Limpar Busca</p></button>
             </div>
@@ -57,76 +57,79 @@
                 </select>
             </div>
         </div>
-    </div>
+        </div>
 
-    <div class="disponiveis">
-        <div class="lista_materiais">
-            <div class="pixpro">
-                <img src="../assets/img/câmerapixpro.webp" alt="Câmera Kodak Pixpro" />
-                <h3>Câmera Kodak Pixpro</h3>
-                <p>Disponível: 10 unidades</p>
-                <button class="btn-solicitar" data-tipo="pixpro">Solicitar</button>
-            </div>
-            <div class="eos">
+        <div class="disponiveis">
+            <div class="lista_materiais">
+                <div class="pixpro">
+                    <img src="../assets/img/câmerapixpro.webp" alt="Câmera Kodak Pixpro" />
+                    <h3>Câmera Kodak Pixpro</h3>
+                    <p>Disponível: 10 unidades</p>
+                    <button class="btn-solicitar" data-tipo="pixpro">Solicitar</button>
+                </div>
+                <div class="eos">
                 <img src="../assets/img/eos.png" alt="Câmera Canon EOS R100" />
                 <h3>Câmera Canon EOS R100</h3>
                 <p>Disponível: 5 unidades</p>
                 <button class="btn-solicitar" data-tipo="eos">Solicitar</button>
-            </div>
-            <div class="tablet">
+                </div>
+                <div class="tablet">
                 <img src="../assets/img/tabletex.png" alt="Tablet EX" />
                 <h3>Tablet EX</h3>
                 <p>Disponível: 12 unidades</p>
                 <button class="btn-solicitar" data-tipo="tablet">Solicitar</button>
-            </div>
-            <div class="notebook">
+                </div>
+                <div class="notebook">
                 <img src="../assets/img/notebook.png" alt="Notebook" />
                 <h3>Notebook</h3>
                 <p>Disponível: 8 unidades</p>
                 <button class="btn-solicitar" data-tipo="notebook">Solicitar</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="modal-solicitacao" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2 id="modal-equipamento">Equipamento</h2>
+            <div id="modal-solicitacao" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2 id="modal-equipamento">Equipamento</h2>
 
-            <div class="campo-preenchimento">
-                <label><strong>Número de série:</strong></label>
-                <span id="modal-serial">#000000</span>
+                    <div class="campo-preenchimento">
+                        <label><strong>Número de série:</strong></label>
+                      <span id="modal-serial">#000000</span>
+                    </div>
+                    <div class="campo-preenchimento">
+                        <label><strong>Itens incluídos:</strong></label>
+                        <span id="modal-itens">Ex: Carregador, manual</span>
+                    </div>
+                    <div class="campo-preenchimento">
+                        <label><strong>Dimensões:</strong></label>
+                        <span class="modal-dimensao">00x00x00 cm</span>
+                    </div>
+
+                <form id="form-solicitacao" method="POST" action="#">
+                    <div class="campo-preenchimento">
+                        <label for="embarcacao">Embarcação</label>
+                        <input type="text" id="embarcacao" name="embarcacao" placeholder="Digite a Embarcação" required />
+                    </div>
+                    <div class="campo-preenchimento">
+                        <label for="data">Data do embarque</label>
+                        <input type="date" id="data" name="data" required />
+                    </div>
+                    <div class="campo-preenchimento">
+                        <label for="supervisor">Supervisor Responsável</label>
+                        <input type="text" id="supervisor" name="supervisor" placeholder="Ex: Carolina Machado" required />
+                    </div>
+                    <div class="botoes-modal">
+                        <button type="submit" class="btn-confirmar">✅Confirmar</button>
+                        <button type="button" class="btn-cancelar">❌Cancelar</button>
+                    </div>
+                </form>
+                </div>
             </div>
-            <div class="campo-preenchimento">
-                <label><strong>Itens incluídos:</strong></label>
-                <span id="modal-itens">Ex: Carregador, manual</span>
-            </div>
-            <div class="campo-preenchimento">
-                <label><strong>Dimensões:</strong></label>
-                <span class="modal-dimensao">00x00x00 cm</span>
-            </div>
-
-            <form id="form-solicitacao" method="POST" action="#">
-                <div class="campo-preenchimento">
-                    <label for="embarcacao">Embarcação</label>
-                    <input type="text" id="embarcacao" name="embarcacao" placeholder="Digite a Embarcação" required />
-                </div>
-                <div class="campo-preenchimento">
-                    <label for="data">Data do embarque</label>
-                    <input type="date" id="data" name="data" required />
-                </div>
-                <div class="campo-preenchimento">
-                    <label for="supervisor">Supervisor Responsável</label>
-                    <input type="text" id="supervisor" name="supervisor" placeholder="Ex: Carolina Machado" required />
-                </div>
-                <div class="botoes-modal">
-                    <button type="submit" class="btn-confirmar">✅Confirmar</button>
-                    <button type="button" class="btn-cancelar">❌Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    </main>
+    <footer>
+        <p>© 2023 Ambipar Group. Todos os direitos reservados.</p>
+    </footer>
     <script src="../assets/embarque.js"></script>
 </body>
 

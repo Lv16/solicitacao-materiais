@@ -15,14 +15,14 @@ body {
 
 header {
     background-color: #d4ff00;
-    padding: 20px 0;
+    padding: 15px;
 }
 
 header .nuvem {
-    padding: 20px;
+    padding: 10px;
     background-color: white;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 600px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -47,6 +47,7 @@ header h1 {
     justify-content: space-between;
     gap: 10px;
     padding-right: 20px;
+    text-align: center;
 }
 
 header .info {
@@ -114,8 +115,8 @@ a {
 }
 
 .logout-btn {
-    background-color: #007a4d;
-    color: #ffffff;
+    background-color: #d4ff00;
+    color: #212121;
     border: none;
     padding: 8px 16px;
     border-radius: 8px;
@@ -126,7 +127,8 @@ a {
 }
 
 .logout-btn:hover {
-    background-color: #005f3a;
+    background-color: #b3d400;
+    color: #f5f5f5;
 }
 
 /* ==============================
