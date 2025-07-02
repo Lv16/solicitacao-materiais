@@ -13,14 +13,14 @@ body {
 
 header {
     background-color: #d4ff00;
-    padding: 20px 0;
+    padding: 15px;
 }
 
 header .nuvem {
-    padding: 20px;
+    padding: 10px;
     background-color: white;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 600px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -45,6 +45,8 @@ header h1 {
     justify-content: space-between;
     gap: 10px;
     padding-right: 20px;
+    text-align: center;
+    text-decoration: underline;
 }
 
 header .info {
@@ -112,8 +114,8 @@ a {
 }
 
 .logout-btn {
-    background-color: #007a4d;
-    color: #ffffff;
+    background-color: #d4ff00;
+    color: #212121;
     border: none;
     padding: 8px 16px;
     border-radius: 8px;
@@ -124,7 +126,8 @@ a {
 }
 
 .logout-btn:hover {
-    background-color: #005f3a;
+    background-color: #b3d400;
+    color: #f5f5f5;
 }
 
 
@@ -168,49 +171,78 @@ a {
 }
 
 .select-tipo {
-    background-color: #212121;
-    color: #d4ff00;
+    background: white url("img/seta.png") no-repeat right 10px center;
+    color: #212121;
     padding: 10px 50px 10px 10px;
     font-size: 15px;
     font-weight: bold;
-    border: 2px solid #d4ff00;
+    border: 2px solid #212121;
     border-radius: 15px;
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10'%3E%3Cpath fill='%23d4ff00' d='M7 10L0 0h14z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 5px center;
     background-size: 12px;
     min-width: 220px;
 }
 
 .select-tipo:hover {
-    background-color: #333333;
+    background-color: #f0eeeed5;
 }
 
 .select-tipo:focus {
     outline: none;
-    box-shadow: 0 0 5px #d4ff00;
+    box-shadow: 0 0 5px #212121;
 }
 
 .select-tipo option {
-    background-color: #212121;
-    color: #d4ff00;
+    background-color: white;
+    color: #212121;
 }
 
-.btn-pesquisar, .btn-limpar {
-    padding: 1rem 2rem;
+.select-tipo option:hover {
+    background-color: #f0eeeed5;
+}
+
+.btn-pesquisar {
+    padding: 20px 1.5rem;
     font-weight: 700;
-    background: #333;
-    color: #d4ff00;
+    background: white url("img/lupa.png") no-repeat center left 4px;
+    align-items: right;
+    color: #212121;
     cursor: pointer;
     border-radius: 0.5rem;
-    border: 2px solid #d4ff00;
+    border: 2px solid #212121;
+    background-size: 18px;
+    display: flex;
+}
+
+.btn-pesquisar p,
+.btn-limpar p {
+    margin: auto;
+    padding-left: 10px;
+    text-align: right;
+}
+
+.btn-limpar {
+    padding: 20px 1.5rem;
+    font-weight: 700;
+    background: white url("img/lixo.png") no-repeat center left 4px;
+    display: flex;
+    color: #212121;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: 2px solid #212121;
+    background-size: 18px;
 }
 
 .btn-pesquisar:hover, .btn-limpar:hover {
-    box-shadow: #d4ff00 2px 5px;
+    box-shadow: #212121 2px 5px;
 }
+
+.btn-pesquisar:active, .btn-limpar:active {
+    box-shadow: #212121 0px 2px;
+    transform: translateY(2px);
+}
+
 
 /* ==============================
    Cards dos Materiais
@@ -222,10 +254,13 @@ a {
 }
 
 .lista_materiais > div {
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    margin: 10px;
+    gap: 10px;
+    background-color: white;
+    border: 2px solid #d4ff00;
+    border-radius: 50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    padding: 5px;
     text-align: center;
 }
 
@@ -289,7 +324,8 @@ a {
     width: 100%;
     height: 100%;
     background-color: rgba(33, 33, 33, 0.8);
-    backdrop-filter: blur(3px);
+    overflow: auto;
+    padding: 20px; 
 }
 
 /* ===== Modal Conteúdo ===== */
@@ -324,7 +360,7 @@ a {
     margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    font-size: 20px;
+    font-size: 1.5em;
     font-weight: bold;
 }
 

@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="{% static 'assets/solicitacoes.css' %}" />
-    <link rel="shortcut icon" href="{% static 'assets/img/icon.png' %}" type="image/png" />
+    <link rel="stylesheet" href="../assets/solicitacoes.css" />
+    <link rel="shortcut icon" href="../assets/img/icon.png" type="image/png" />
     <title>Minhas Solicitações</title>
 </head>
 
@@ -14,24 +14,21 @@
         <div class="nuvem">
             <div class="logo">
                 <picture>
-                    <source srcset="{% static 'assets/img/logo_grupo_mobile.png' %}" type="image/png"
-                        media="(max-width: 600px)" />
-                    <source srcset="{% static 'assets/img/logo_grupo_tablet.png' %}" type="image/png"
-                        media="(max-width: 900px)" />
-                    <img src="{% static 'assets/img/logo_grupo.png' %}" alt="logo" />
+                    <source srcset="../assets/img/logo_grupo_mobile.png" type="image/png" media="(max-width: 600px)" />
+                    <source srcset="../assets/img/logo_grupo_tablet.png" type="image/png" media="(max-width: 900px)" />
+                    <img src="../assets/img/logo_grupo.png" alt="logo" />
                 </picture>
             </div>
             <h1>Minhas Solicitações</h1>
             <div class="info">
-                <a href="{% url 'solicitar_material' %}" rel="back" target="_top">
+                <a href="embarque.html" rel="next" target="_self" class="link-solicitacoes">
                     <p>Nova solicitação</p>
                 </a>
             </div>
         </div>
         <div class="botoes-header">
             <div class="user-menu">
-                <img src="{% static 'assets/img/profile.png' %}" alt="Usuário" class="user-img"
-                    onclick="toggleMenu()" />
+                <img src="../assets/img/profile.png" alt="Usuário" class="user-img" onclick="toggleMenu()" />
                 <div class="dropdown" id="dropdown">
                     <button class="logout-btn">Logout</button>
                 </div>
@@ -50,30 +47,30 @@
     </div>
 
     <div class="lista-solicitacoes">
-        {% if solicitacoes %}
-        {% for solicitacao in solicitacoes %}
-        <div class="card-solicitacao" data-status="{{ solicitacao.status }}">
-            <h3>{{ solicitacao.equipamento_nome }}</h3>
-            <p><strong>Embarcação:</strong> {{ solicitacao.embarcacao }}</p>
-            <p><strong>Data:</strong> {{ solicitacao.data_embarque|date:"d/m/Y" }}</p>
-            <p><strong>Supervisor:</strong> {{ solicitacao.supervisor }}</p>
-            <p><strong>Status:</strong>
-                <span class="badge {{ solicitacao.status }}"></span>
-            </p>
+        <div class="card-solicitacao" data-status="andamento">
+            <h3>Câmera Kodak Pixpro</h3>
+            <p><strong>Embarcação:</strong> Norsul Vitória</p>
+            <p><strong>Data:</strong> 25/06/2025</p>
+            <p><strong>Supervisor:</strong> Carolina Machado</p>
+            <p><strong>Status:</strong> <span class="badge andamento">Em andamento</span></p>
             <div class="botoes-card">
-                <form method="POST" action="{% url 'cancelar_solicitacao' solicitacao.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn-cancelar">Cancelar</button>
-                </form>
+                <button class="btn-cancelar">Cancelar</button>
             </div>
         </div>
-        {% endfor %}
-        {% else %}
-        <p>Nenhuma solicitação encontrada.</p>
-        {% endif %}
+
+        <div class="card-solicitacao" data-status="concluido">
+            <h3>Tablet EX</h3>
+            <p><strong>Embarcação:</strong> Norsul Santos</p>
+            <p><strong>Data:</strong> 20/06/2025</p>
+            <p><strong>Supervisor:</strong> João Ferreira</p>
+            <p><strong>Status:</strong> <span class="badge concluido">Concluído</span></p>
+            <div class="botoes-card">
+                <button class="btn-cancelar">Cancelar</button>
+            </div>
+        </div>
     </div>
 
-    <script src="{% static 'assets/solicitacoes.js' %}"></script>
+    <script src="../assets/solicitacoes.js"></script>
 </body>
 
 </html>
