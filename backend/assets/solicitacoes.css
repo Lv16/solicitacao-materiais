@@ -28,7 +28,7 @@ header .nuvem {
     padding: 10px;
     background-color: white;
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 800px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -297,6 +297,13 @@ footer {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 15px;
     }
+
+    footer {
+        padding: 3px 0;
+        font-size: 0.5em;
+        white-space: nowrap;
+        
+    }
 }
 
 /* Telas Pequenas (Celulares) */
@@ -361,5 +368,12 @@ footer {
 
     .logout-btn {
         padding: 8px 0;
+    }
+
+    footer {
+        padding: 3px 0;
+        font-size: 0.5em;
+        white-space: nowrap;
+        
     }
 }

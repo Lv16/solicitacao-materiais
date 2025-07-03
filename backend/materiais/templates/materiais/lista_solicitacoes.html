@@ -1,41 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../assets/solicitacoes.css" />
-    <link rel="shortcut icon" href="../assets/img/icon.png" type="image/png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'solicitacoes.css' %}" />
+    <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/png" />
     <title>Minhas Solicitações</title>
 </head>
-
 <body>
     <header>
         <div class="nuvem">
             <div class="logo">
                 <picture>
-                    <source srcset="../assets/img/logo_grupo_mobile.png" type="image/png" media="(max-width: 600px)" />
-                    <source srcset="../assets/img/logo_grupo_tablet.png" type="image/png" media="(max-width: 900px)" />
-                    <img src="../assets/img/logo_grupo.png" alt="logo" />
+                    <source srcset="{% static 'img/logo_grupo_mobile.png' %}" type="image/png" media="(max-width: 600px)" />
+                    <source srcset="{% static 'img/logo_grupo_tablet.png' %}" type="image/png" media="(max-width: 900px)" />
+                    <img src="{% static 'img/logo_grupo.png' %}" alt="logo" />
                 </picture>
             </div>
             <h1>Minhas Solicitações</h1>
             <div class="info">
-                <a href="embarque.html" rel="next" target="_self" class="link-solicitacoes">
+                <a href="{% url 'lista_materiais' %}" rel="next" target="_self" class="link-solicitacoes">
                     <p>Nova solicitação</p>
                 </a>
             </div>
         </div>
         <div class="botoes-header">
             <div class="user-menu">
-                <img src="../assets/img/profile.png" alt="Usuário" class="user-img" onclick="toggleMenu()" />
+                <img src="{% static 'img/profile.png' %}" alt="Usuário" class="user-img" onclick="toggleMenu()" />
                 <div class="dropdown" id="dropdown">
                     <button class="logout-btn">Logout</button>
                 </div>
             </div>
         </div>
     </header>
-
     <main>
         <div class="container-solicitacoes">
             <div class="filtros"></div>
@@ -68,12 +66,10 @@
                 </div>
             </div>
         </div>
-        <script src="../assets/solicitacoes.js"></script>
+        <script src="{% static 'solicitacoes.js' %}"></script>
     </main>
     <footer>
         <p>© 2023 Ambipar Group. Todos os direitos reservados.</p>
     </footer>
 </body>
-<script src="../assets/solicitacoes.js"></script>
-
 </html>

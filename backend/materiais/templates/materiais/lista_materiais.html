@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'embarque.css' %}" />
+    <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/png" />
+    <title>Solicitação de Material</title>
+</head>
+<body>
+    <header>
+        <div class="nuvem">
+            <div class="logo">
+                <picture>
+                    <source srcset="{% static 'img/logo_grupo_mobile.png' %}" type="image/png" media="(max-width: 600px)" />
+                    <source srcset="{% static 'img/logo_grupo_tablet.png' %}" type="image/png" media="(max-width: 900px)" />
+                    <img src="{% static 'img/logo_grupo.png' %}" alt="logo" />
+                </picture>
+            </div>
+            <h1>Solicitação de Material</h1>
+            <div class="info">
+                <a href="{% url 'lista_solicitacoes' %}" class="link-solicitacoes">
+                    <p>Minhas Solicitações</p>
+                </a>
+            </div>
+        </div>
+        <div class="botoes-header">
+            <div class="user-menu">
+                <img src="{% static 'img/profile.png' %}" alt="Usuário" class="user-img" onclick="toggleMenu()" />
+                <div class="dropdown" id="dropdown">
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="materiais">
+                <h2>Materiais Disponíveis</h2>
+                <div class="barra-pesquisa">
+                    <form method="get">
+                        <input type="text" name="q" placeholder="Ex: Câmera Kodak" class="pesquisar" value="{{ request.GET.q }}">
+                        <button type="submit" class="btn-pesquisar"><p>Pesquisar</p></button>
+                        <a href="{% url 'lista_materiais' %}" class="btn-limpar"><p>Limpar Busca</p></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="disponiveis">
+            <div class="lista_materiais">
+                {% for material in materiais %}
+                <div class="material-card">
+                    <h3>{{ material.nome }}</h3>
+                    <p>{{ material.descricao }}</p>
+                    <p>Disponível: {{ material.quantidade }} unidades</p>
+                    <a href="{% url 'cria_solicitacao' %}?material_id={{ material.id }}" class="btn-solicitar">Solicitar</a>
+                </div>
+                {% empty %}
+                <p>Nenhum material disponível.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2023 Ambipar Group. Todos os direitos reservados.</p>
+    </footer>
+    <script src="{% static 'embarque.js' %}"></script>
+</body>
+</html>
