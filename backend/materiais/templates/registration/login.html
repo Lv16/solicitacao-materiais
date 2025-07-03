@@ -5,16 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{% static 'solicitacoes.css' %}">
-    <style>
-        body { display: flex; align-items: center; justify-content: center; height: 100vh; background: #f5f5f5; }
-        .login-box { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px #ccc; }
-        h2 { text-align: center; }
-        button { width: 100%; }
-    </style>
-</head>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
 <body>
     <div class="login-box">
+        <img src="{% static 'img/logo_grupo.png' %}" alt="Logo Ambipar">
         <h2>Login</h2>
         <form method="post">
             {% csrf_token %}

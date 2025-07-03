@@ -29,7 +29,7 @@
             <div class="user-menu">
                 <img src="{% static 'img/profile.png' %}" alt="Usuário" class="user-img" onclick="toggleMenu()" />
                 <div class="dropdown" id="dropdown">
-                    <button class="logout-btn">Logout</button>
+                    <a href="{% url 'login' %}"><button class="logout-btn">Logout</button></a>
                 </div>
             </div>
         </div>
