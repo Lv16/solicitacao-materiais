@@ -244,6 +244,15 @@ a {
     background-color: #cc0000;
 }
 
+.btn-concluir {
+    background-color: #d4ff00;
+    color: black;
+}
+
+.btn-concluir:hover {
+    background-color: #b3d400;
+}
+
 
 /* ==============================
    Esconder Elementos

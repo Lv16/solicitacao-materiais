@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from .models import Material, Solicitacao
+from django.core.mail import send_mail
+from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from .models import Material, Solicitacao
 
 @login_required
 def lista_materiais(request):
@@ -34,12 +36,10 @@ def cria_solicitacao(request):
         except Material.DoesNotExist:
             return JsonResponse({'error': 'Material não encontrado'}, status=404)
 
-        # Verifica se há quantidade suficiente em estoque
         if material.quantidade < quantidade:
             return JsonResponse({'error': 'Quantidade indisponível em estoque.'}, status=400)
 
-        # Cria a solicitação
-        Solicitacao.objects.create(
+        solicitacao = Solicitacao.objects.create(
             material=material,
             quantidade=quantidade,
             solicitante=request.user.get_full_name() or request.user.email,
@@ -50,9 +50,30 @@ def cria_solicitacao(request):
             embarcacao=embarcacao,
         )
 
-        # Atualiza o estoque do material
         material.quantidade -= quantidade
         material.save()
+
+        # Envia e-mail para solicitante e para o responsável
+        assunto = 'Confirmação de Solicitação de Material'
+        mensagem = (
+            f"Olá {solicitacao.solicitante},\n\n"
+            f"Sua solicitação de {solicitacao.quantidade} unidade(s) do material '{material.nome}' foi registrada com sucesso.\n"
+            f"Detalhes:\n"
+            f"- Embarcação: {solicitacao.embarcacao}\n"
+            f"- Supervisor: {solicitacao.supervisor}\n"
+            f"- Data de embarque: {solicitacao.data}\n\n"
+            "Obrigado."
+        )
+        remetente = settings.DEFAULT_FROM_EMAIL
+        destinatarios = [request.user.email, 'aprendiz.controles@ambipar.com']
+
+        send_mail(
+            subject=assunto,
+            message=mensagem,
+            from_email=remetente,
+            recipient_list=destinatarios,
+            fail_silently=False,
+        )
 
         return JsonResponse({'success': True})
 
@@ -70,12 +91,10 @@ def atualizar_status_solicitacao(request):
         if novo_status not in dict(Solicitacao.STATUS_CHOICES):
             return JsonResponse({'error': 'Status inválido'}, status=400)
 
-        # Se for cancelado e ainda não estava cancelado, devolve ao estoque
         if novo_status == 'cancelado' and solicitacao.status != 'cancelado':
             solicitacao.material.quantidade += solicitacao.quantidade
             solicitacao.material.save()
 
-        # Se for concluído e ainda não estava concluído, devolve ao estoque
         if novo_status == 'concluido' and solicitacao.status != 'concluido':
             solicitacao.material.quantidade += solicitacao.quantidade
             solicitacao.material.save()
@@ -96,11 +115,9 @@ def marcar_retorno_material(request):
     try:
         solicitacao = Solicitacao.objects.get(id=solicitacao_id, user=request.user)
 
-        # Marca que o material retornou para a base
         solicitacao.retornado_base = True
         solicitacao.save()
 
-        # Atualiza o estoque do material somando a quantidade da solicitação
         solicitacao.material.quantidade += solicitacao.quantidade
         solicitacao.material.save()
 

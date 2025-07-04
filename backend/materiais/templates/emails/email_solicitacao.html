@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Solicitação Confirmada</title>
+</head>
+<body>
+  <h2>Solicitação de Material Confirmada</h2>
+  <p><strong>Material:</strong> {{ solicitacao.material.nome }}</p>
+  <p><strong>Quantidade:</strong> {{ solicitacao.quantidade }}</p>
+  <p><strong>Solicitante:</strong> {{ solicitacao.solicitante }}</p>
+  <p><strong>Data:</strong> {{ solicitacao.data_solicitacao|date:"d/m/Y H:i" }}</p>
+  <p><strong>Embarcação:</strong> {{ solicitacao.embarcacao }}</p>
+  <p><strong>Supervisor:</strong> {{ solicitacao.supervisor }}</p>
+  <p>Essa é uma mensagem automática da solicitação de material</p>
+</body>
+</html>
