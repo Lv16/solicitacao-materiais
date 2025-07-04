@@ -5,7 +5,7 @@ class Material(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField(blank=True)
     quantidade = models.PositiveIntegerField(default=0)
-    embarcado = models.BooleanField(default=False)  # Adicione este campo
+    embarcado = models.BooleanField(default=False)  # Indica se o material está embarcado
 
     def __str__(self):
         return self.nome
@@ -26,10 +26,14 @@ class Solicitacao(models.Model):
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='andamento')
 
-    # Novos campos adicionados
+    # Campos extras
     data = models.DateField(null=True, blank=True)
     supervisor = models.CharField(max_length=100, blank=True)
     embarcacao = models.CharField(max_length=100, blank=True)
+
+    # Campos que o coordenador pode marcar
+    concluida = models.BooleanField(default=False)        # Marca se a operação foi concluída
+    retornado_base = models.BooleanField(default=False)   # Marca se o material retornou para a base
 
     def __str__(self):
         return f"{self.solicitante} - {self.material.nome} ({self.quantidade})"

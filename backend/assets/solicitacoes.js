@@ -54,7 +54,7 @@ function filtrarCards(status, termo) {
 
 /* Logout */
 const logoutBtn = document.querySelector('.logout-btn');
-if(logoutBtn) {
+if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
         alert('Você saiu!');
         // window.location.href = 'login.html';
@@ -66,7 +66,7 @@ function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
-        for (let i=0; i < cookies.length; i++) {
+        for (let i = 0; i < cookies.length; i++) {
             const cookie = cookies[i].trim();
             if (cookie.startsWith(name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
@@ -83,27 +83,46 @@ function atualizarStatus(id, novoStatus) {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            "X-CSRFToken": getCookie('csrftoken') 
+            "X-CSRFToken": getCookie('csrftoken')
         },
         body: `id=${id}&status=${novoStatus}`
     })
-    .then(response => {
-        console.log('Response status:', response.status);
-        if (!response.ok) {
-            throw new Error('Erro HTTP ' + response.status);
-        }
-        return response.json();
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Status atualizado para: " + data.status);
+                location.reload();
+            } else {
+                alert("Erro ao atualizar: " + data.error);
+            }
+        })
+        .catch(error => {
+            alert("Erro na requisição");
+            console.error(error);
+        });
+}
+
+/* NOVA Função para marcar o retorno do material */
+function marcarComoRetornado(id) {
+    fetch("/solicitacoes/marcar-retorno/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": getCookie('csrftoken')
+        },
+        body: `id=${id}`
     })
-    .then(data => {
-        if (data.success) {
-            alert("Status atualizado para: " + data.status);
-            location.reload();
-        } else {
-            alert("Erro ao atualizar: " + data.error);
-        }
-    })
-    .catch(error => {
-        alert("Erro na requisição: " + error.message);
-        console.error(error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert("Erro: " + data.error);
+            }
+        })
+        .catch(error => {
+            alert("Erro na requisição");
+            console.error(error);
+        });
 }

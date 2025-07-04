@@ -67,6 +67,7 @@
                 <div class="botoes-card">
                     <button class="btn-cancelar"
                         onclick="atualizarStatus({{ solicitacao.id }}, 'cancelado')">Cancelar</button>
+                        <button class="btn-concluir" onclick="atualizarStatus({{ solicitacao.id }}, 'concluido')">Concluído</button>
                 </div>
             </div>
             {% empty %}
