@@ -6,10 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="{% static 'login.css' %}">
+</head>
+
 <body>
+    <div class="background-container">
+        <img src="{% static 'img/ambipar.png' %}" alt="Ambipar Background" class="background-img">
+    </div>
+
     <div class="login-box">
-        <img src="{% static 'img/logo_grupo.png' %}" alt="Logo Ambipar">
-        <h2>Login</h2>
+        <picture>
+            <source media="(max-width:600px )" srcset="{% static 'img/logo_grupo_mobile.png' %}" type="image/png">
+            <img src="{% static 'img/logo_grupo_tablet.png' %}" alt="Logo Ambipar">
+        </picture>
+        <p>Por favor, faça o login</p>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
