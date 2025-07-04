@@ -42,7 +42,7 @@
                     <form method="get">
                         <input type="text" name="q" placeholder="Ex: Câmera Kodak" class="pesquisar" value="{{ request.GET.q }}">
                         <button type="submit" class="btn-pesquisar"><p>Pesquisar</p></button>
-                        <a href="{% url 'lista_materiais' %}" class="btn-limpar"><p>Limpar Busca</p></a>
+                        <button class="btn-limpar"><p>Limpar Busca</p></button>
                     </form>
                 </div>
             </div>
@@ -54,17 +54,44 @@
                     <h3>{{ material.nome }}</h3>
                     <p>{{ material.descricao }}</p>
                     <p>Disponível: {{ material.quantidade }} unidades</p>
-                    <a href="{% url 'cria_solicitacao' %}?material_id={{ material.id }}" class="btn-solicitar">Solicitar</a>
+                    <button type="button"
+                            class="btn-solicitar"
+                            data-id="{{ material.id }}"
+                            data-nome="{{ material.nome }}">
+                            Solicitar
+                    </button>
                 </div>
                 {% empty %}
-                <p>Nenhum material disponível.</p>
                 {% endfor %}
             </div>
         </div>
     </main>
+   
+    <div id="modal-solicitacao" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="fecharModal()">&times;</span>
+            <h2>Solicitar <span id="modal-equipamento"></span></h2>
+            <form id="form-solicitacao" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="material_id" id="input-material-id">
+                <div class="campo-preenchimento">
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" name="quantidade" id="input-quantidade" min="1" required>
+                </div>
+                <div class="campo-preenchimento">
+                    <label for="observacao">Observação:</label>
+                    <input type="text" name="observacao" id="input-observacao">
+                </div>
+                <div class="botoes-modal">
+                    <button type="submit" class="btn-confirmar">Confirmar</button>
+                    <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <footer>
-        <p>© 2023 Ambipar Group. Todos os direitos reservados.</p>
+        <p>© 2025 Ambipar Group. Todos os direitos reservados.</p>
     </footer>
-    <script src="{% static 'embarque.js' %}"></script>
+    <script src="{% static 'embarque.js' %}" defer></script>
 </body>
 </html>

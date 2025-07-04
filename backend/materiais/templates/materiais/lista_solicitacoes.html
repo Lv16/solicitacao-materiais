@@ -29,7 +29,7 @@
             <div class="user-menu">
                 <img src="{% static 'img/profile.png' %}" alt="Usuário" class="user-img" onclick="toggleMenu()" />
                 <div class="dropdown" id="dropdown">
-                    <button class="logout-btn">Logout</button>
+                    <a href="{% url 'login' %}"><button class="logout-btn">Logout</button></a>
                 </div>
             </div>
         </div>
@@ -45,26 +45,24 @@
             </div>
         </div>
         <div class="lista-solicitacoes">
-            <div class="card-solicitacao" data-status="andamento">
-                <h3>Câmera Kodak Pixpro</h3>
-                <p><strong>Embarcação:</strong> Norsul Vitória</p>
-                <p><strong>Data:</strong> 25/06/2025</p>
-                <p><strong>Supervisor:</strong> Carolina Machado</p>
-                <p><strong>Status:</strong> <span class="badge andamento">Em andamento</span></p>
+            {% for solicitacao in solicitacoes %}
+            <div class="card-solicitacao" data-status="{{ solicitacao.status|default:'andamento' }}">
+                <h3>{{ solicitacao.material.nome }}</h3>
+                <p><strong>Embarcação:</strong> {{ solicitacao.embarcacao|default:"-" }}</p>
+                <p><strong>Data:</strong> {{ solicitacao.data|date:"d/m/Y" }}</p>
+                <p><strong>Supervisor:</strong> {{ solicitacao.supervisor|default:"-" }}</p>
+                <p><strong>Status:</strong>
+                    <span class="badge {% if solicitacao.status == 'concluido' %}concluido{% else %}andamento{% endif %}">
+                        {{ solicitacao.get_status_display|default:solicitacao.status }}
+                    </span>
+                </p>
                 <div class="botoes-card">
                     <button class="btn-cancelar">Cancelar</button>
                 </div>
             </div>
-            <div class="card-solicitacao" data-status="concluido">
-                <h3>Tablet EX</h3>
-                <p><strong>Embarcação:</strong> Norsul Santos</p>
-                <p><strong>Data:</strong> 20/06/2025</p>
-                <p><strong>Supervisor:</strong> João Ferreira</p>
-                <p><strong>Status:</strong> <span class="badge concluido">Concluído</span></p>
-                <div class="botoes-card">
-                    <button class="btn-cancelar">Cancelar</button>
-                </div>
-            </div>
+                {% empty %}
+                <p>Nenhuma solicitação encontrada.</p>
+                {% endfor %}
         </div>
         <script src="{% static 'solicitacoes.js' %}"></script>
     </main>

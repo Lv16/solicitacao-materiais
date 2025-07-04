@@ -154,14 +154,14 @@ a {
     text-align: center;
 }
 
-.barra-pesquisa {
+form {
     display: flex;
     gap: 10px;
     margin-bottom: 8px;
     width: 100%;
 }
 
-.form-pesquisa {
+.barra-pesquisa {
     display: flex;
     align-items: center;
     width: 100%;
@@ -174,50 +174,6 @@ a {
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1em;
-}
-
-.filtro-tipo {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    gap: 10px;
-}
-
-.filtro-tipo label {
-    font-weight: bold;
-    color: #212121;
-}
-
-.select-tipo {
-    background: white url("/static/img/seta.png") no-repeat right 10px center;
-    color: #212121;
-    padding: 10px 50px 10px 10px;
-    font-size: 15px;
-    font-weight: bold;
-    border: 2px solid #212121;
-    border-radius: 15px;
-    cursor: pointer;
-    appearance: none;
-    background-size: 12px;
-    min-width: 220px;
-}
-
-.select-tipo:hover {
-    background-color: #f0eeeed5;
-}
-
-.select-tipo:focus {
-    outline: none;
-    box-shadow: 0 0 5px #212121;
-}
-
-.select-tipo option {
-    background-color: white;
-    color: #212121;
-}
-
-.select-tipo option:hover {
-    background-color: #f0eeeed5;
 }
 
 .btn-pesquisar {
@@ -264,7 +220,7 @@ a {
 
 
 /* ==============================
-   Cards dos Materiais
+        Materiais
 ============================== */
 .lista_materiais {
     display: grid;
@@ -291,6 +247,8 @@ a {
 .lista_materiais p {
     margin: 10px 0;
     color: #333;
+    text-align: center;
+    display: block;
 }
 
 .lista_materiais img {
@@ -318,7 +276,7 @@ a {
 }
 
 /* ==============================
-   Badges de Estoque
+        Estoque
 ============================== */
 .badge {
     padding: 5px 10px;
@@ -331,7 +289,7 @@ a {
 }
 
 /* ==============================
-   Modal
+        Modal
 ============================== */
 /* ===== Modal (Fundo) ===== */
 .modal {
@@ -533,24 +491,13 @@ footer {
         margin-top: 10px;
     }
 
-    .barra-pesquisa {
+    form {
         flex-direction: column;
         gap: 8px;
     }
 
     .btn-pesquisar, .btn-limpar {
         width: 100%;
-    }
-
-    .filtro-tipo {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
-
-    .select-tipo {
-        width: 100%;
-        min-width: unset;
     }
 
     .container {

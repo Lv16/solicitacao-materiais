@@ -93,3 +93,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/materiais/'
+
+AUTHENTICATION_BACKENDS = [
+    'materiais.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',  
+]

@@ -142,6 +142,7 @@ a {
 ============================== */
 .container-solicitacoes {
     padding: 20px;
+    justify-items: center;
 }
 
 #pesquisa {

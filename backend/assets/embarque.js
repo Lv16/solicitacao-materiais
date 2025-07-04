@@ -37,16 +37,22 @@ document.querySelector('.lista_materiais').appendChild(mensagemNenhum);
 const modal = document.getElementById('modal-solicitacao');
 const modalEquipamento = document.getElementById('modal-equipamento');
 const btnFecharModal = document.querySelector('.close-btn');
-const btnConfirmar = document.querySelector('.btn-confirmar');
 const btnCancelar = document.querySelector('.btn-cancelar');
+const formSolicitacao = document.getElementById('form-solicitacao');
+const inputMaterialId = document.getElementById('input-material-id');
 
-function abrirModal(equipamentoNome) {
-    modalEquipamento.textContent = equipamentoNome;
-    modal.style.display = 'block';
-}
+// Abrir modal e preencher dados
+document.querySelectorAll('.btn-solicitar').forEach(btn => {
+    btn.addEventListener('click', function () {
+        modal.style.display = 'block';
+        modalEquipamento.textContent = this.dataset.nome;
+        inputMaterialId.value = this.dataset.id;
+    });
+});
 
 function fecharModal() {
     modal.style.display = 'none';
+    formSolicitacao.reset();
 }
 
 if (btnFecharModal) btnFecharModal.addEventListener('click', fecharModal);
@@ -58,21 +64,35 @@ window.addEventListener('click', function (e) {
     }
 });
 
-/* ================================
-    Botões de Solicitação
-================================ */
-const botoesSolicitar = document.querySelectorAll('.btn-solicitar');
+// Envio AJAX do formulário
+if (formSolicitacao) {
+    formSolicitacao.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-botoesSolicitar.forEach(botao => {
-    botao.addEventListener('click', function (e) {
-        e.stopPropagation();
-        // Pegando o nome do equipamento no elemento <h3> irmão dentro da mesma div pai
-        const itemNome = this.closest('div').querySelector('h3').textContent;
-        abrirModal(itemNome);
+        const material_id = inputMaterialId.value;
+        const quantidade = document.getElementById('input-quantidade').value;
+        const observacao = document.getElementById('input-observacao').value;
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        fetch('/solicitacoes/nova/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': csrfToken
+            },
+            body: `material_id=${material_id}&quantidade=${quantidade}&observacao=${encodeURIComponent(observacao)}`
+        })
+        .then(response => {
+            if (response.ok) {
+                fecharModal();
+                alert('Solicitação enviada com sucesso!');
+                window.location.reload();
+            } else {
+                alert('Erro ao enviar solicitação.');
+            }
+        });
     });
-});
-
-
+}
 /* ================================
     Filtro de busca e tipo
 ================================ */
