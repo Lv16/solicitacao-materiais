@@ -64,7 +64,7 @@ window.addEventListener('click', function (e) {
     }
 });
 
-// Envio AJAX do formulário
+// Envio AJAX do formulário - atualizei para incluir os campos data, supervisor e embarcacao
 if (formSolicitacao) {
     formSolicitacao.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -72,7 +72,19 @@ if (formSolicitacao) {
         const material_id = inputMaterialId.value;
         const quantidade = document.getElementById('input-quantidade').value;
         const observacao = document.getElementById('input-observacao').value;
+        const data = document.getElementById('input-data').value;
+        const supervisor = document.getElementById('input-supervisor').value;
+        const embarcacao = document.getElementById('input-embarcacao').value;
         const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        // Monta o corpo da requisição com encodeURIComponent para evitar erros com caracteres especiais
+        const body = 
+            `material_id=${encodeURIComponent(material_id)}&` +
+            `quantidade=${encodeURIComponent(quantidade)}&` +
+            `observacao=${encodeURIComponent(observacao)}&` +
+            `data=${encodeURIComponent(data)}&` +
+            `supervisor=${encodeURIComponent(supervisor)}&` +
+            `embarcacao=${encodeURIComponent(embarcacao)}`;
 
         fetch('/solicitacoes/nova/', {
             method: 'POST',
@@ -80,7 +92,7 @@ if (formSolicitacao) {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'X-CSRFToken': csrfToken
             },
-            body: `material_id=${material_id}&quantidade=${quantidade}&observacao=${encodeURIComponent(observacao)}`
+            body: body
         })
         .then(response => {
             if (response.ok) {
@@ -90,9 +102,14 @@ if (formSolicitacao) {
             } else {
                 alert('Erro ao enviar solicitação.');
             }
+        })
+        .catch(err => {
+            console.error('Erro no fetch:', err);
+            alert('Erro ao enviar solicitação.');
         });
     });
 }
+
 /* ================================
     Filtro de busca e tipo
 ================================ */

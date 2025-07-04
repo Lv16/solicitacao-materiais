@@ -37,8 +37,7 @@ inputPesquisa.addEventListener('input', () => {
 
 function filtrarCards(status, termo) {
     cards.forEach(card => {
-        const statusCard = card.dataset.status;  // melhor usar dataset
-        // Pega o texto do <p> da embarcação, retirando o label "Embarcação:"
+        const statusCard = card.dataset.status;
         const embarcacaoP = card.querySelector('p:nth-of-type(1)');
         const embarcacao = embarcacaoP ? embarcacaoP.textContent.replace('Embarcação:', '').trim().toLowerCase() : '';
 
@@ -55,7 +54,56 @@ function filtrarCards(status, termo) {
 
 /* Logout */
 const logoutBtn = document.querySelector('.logout-btn');
-logoutBtn.addEventListener('click', () => {
-    alert('Você saiu!');
-    // window.location.href = 'login.html';
-});
+if(logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+        alert('Você saiu!');
+        // window.location.href = 'login.html';
+    });
+}
+
+/* Função para pegar o token CSRF do cookie */
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i=0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+/* Função para atualizar o status da solicitação via AJAX */
+function atualizarStatus(id, novoStatus) {
+    fetch("/solicitacoes/atualizar-status/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": getCookie('csrftoken') 
+        },
+        body: `id=${id}&status=${novoStatus}`
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            throw new Error('Erro HTTP ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            alert("Status atualizado para: " + data.status);
+            location.reload();
+        } else {
+            alert("Erro ao atualizar: " + data.error);
+        }
+    })
+    .catch(error => {
+        alert("Erro na requisição: " + error.message);
+        console.error(error);
+    });
+}

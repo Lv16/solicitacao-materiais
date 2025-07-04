@@ -1,20 +1,27 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="{% static 'solicitacoes.css' %}" />
     <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/png" />
     <title>Minhas Solicitações</title>
 </head>
+
 <body>
+    <!-- Token CSRF oculto para JavaScript -->
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+
     <header>
         <div class="nuvem">
             <div class="logo">
                 <picture>
-                    <source srcset="{% static 'img/logo_grupo_mobile.png' %}" type="image/png" media="(max-width: 600px)" />
-                    <source srcset="{% static 'img/logo_grupo_tablet.png' %}" type="image/png" media="(max-width: 900px)" />
+                    <source srcset="{% static 'img/logo_grupo_mobile.png' %}" type="image/png"
+                        media="(max-width: 600px)" />
+                    <source srcset="{% static 'img/logo_grupo_tablet.png' %}" type="image/png"
+                        media="(max-width: 900px)" />
                     <img src="{% static 'img/logo_grupo.png' %}" alt="logo" />
                 </picture>
             </div>
@@ -52,17 +59,19 @@
                 <p><strong>Data:</strong> {{ solicitacao.data|date:"d/m/Y" }}</p>
                 <p><strong>Supervisor:</strong> {{ solicitacao.supervisor|default:"-" }}</p>
                 <p><strong>Status:</strong>
-                    <span class="badge {% if solicitacao.status == 'concluido' %}concluido{% else %}andamento{% endif %}">
+                    <span
+                        class="badge {% if solicitacao.status == 'concluido' %}concluido{% else %}andamento{% endif %}">
                         {{ solicitacao.get_status_display|default:solicitacao.status }}
                     </span>
                 </p>
                 <div class="botoes-card">
-                    <button class="btn-cancelar">Cancelar</button>
+                    <button class="btn-cancelar"
+                        onclick="atualizarStatus({{ solicitacao.id }}, 'cancelado')">Cancelar</button>
                 </div>
             </div>
-                {% empty %}
-                <p>Nenhuma solicitação encontrada.</p>
-                {% endfor %}
+            {% empty %}
+            <p>Nenhuma solicitação encontrada.</p>
+            {% endfor %}
         </div>
         <script src="{% static 'solicitacoes.js' %}"></script>
     </main>
@@ -70,4 +79,5 @@
         <p>© 2023 Ambipar Group. Todos os direitos reservados.</p>
     </footer>
 </body>
+
 </html>
