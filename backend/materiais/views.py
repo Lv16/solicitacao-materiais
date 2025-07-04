@@ -70,8 +70,13 @@ def atualizar_status_solicitacao(request):
         if novo_status not in dict(Solicitacao.STATUS_CHOICES):
             return JsonResponse({'error': 'Status inválido'}, status=400)
 
-        # Se a solicitação foi cancelada e antes não era cancelada, devolve ao estoque
+        # Se for cancelado e ainda não estava cancelado, devolve ao estoque
         if novo_status == 'cancelado' and solicitacao.status != 'cancelado':
+            solicitacao.material.quantidade += solicitacao.quantidade
+            solicitacao.material.save()
+
+        # Se for concluído e ainda não estava concluído, devolve ao estoque
+        if novo_status == 'concluido' and solicitacao.status != 'concluido':
             solicitacao.material.quantidade += solicitacao.quantidade
             solicitacao.material.save()
 
@@ -82,7 +87,6 @@ def atualizar_status_solicitacao(request):
 
     except Solicitacao.DoesNotExist:
         return JsonResponse({'error': 'Solicitação não encontrada'}, status=404)
-
 
 @login_required
 @require_POST
