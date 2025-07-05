@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="{% static 'solicitacoes.css' %}" />
-    <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/png" />
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
     <title>Minhas Solicitações</title>
 </head>
 
@@ -49,6 +49,7 @@
                 <button class="filtro ativo" data-status="todos">Todos</button>
                 <button class="filtro" data-status="andamento">Em andamento</button>
                 <button class="filtro" data-status="concluido">Concluído</button>
+                <button type="button" class="filtro"  onclick="limparHistorico()">Limpar Histórico</button>
             </div>
         </div>
         <div class="lista-solicitacoes">

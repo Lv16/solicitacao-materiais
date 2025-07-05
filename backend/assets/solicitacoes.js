@@ -102,7 +102,7 @@ function atualizarStatus(id, novoStatus) {
         });
 }
 
-/* NOVA Função para marcar o retorno do material */
+/* Função para marcar o retorno do material */
 function marcarComoRetornado(id) {
     fetch("/solicitacoes/marcar-retorno/", {
         method: "POST",
@@ -119,6 +119,34 @@ function marcarComoRetornado(id) {
                 location.reload();
             } else {
                 alert("Erro: " + data.error);
+            }
+        })
+        .catch(error => {
+            alert("Erro na requisição");
+            console.error(error);
+        });
+}
+
+/* NOVA: Função para limpar o histórico após confirmação */
+function limparHistorico() {
+    if (!confirm("Tem certeza que deseja apagar todo o histórico de solicitações?")) {
+        return;
+    }
+
+    fetch("/solicitacoes/limpar/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": getCookie('csrftoken')
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Histórico limpo com sucesso!");
+                location.reload();
+            } else {
+                alert("Erro ao limpar histórico: " + data.error);
             }
         })
         .catch(error => {

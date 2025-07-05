@@ -7,15 +7,18 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .models import Material, Solicitacao
 
+
 @login_required
 def lista_materiais(request):
     materiais = Material.objects.all()
     return render(request, 'materiais/lista_materiais.html', {'materiais': materiais})
 
+
 @login_required
 def lista_solicitacoes(request):
     solicitacoes = Solicitacao.objects.filter(user=request.user)
     return render(request, 'materiais/lista_solicitacoes.html', {'solicitacoes': solicitacoes})
+
 
 @login_required
 def cria_solicitacao(request):
@@ -79,6 +82,7 @@ def cria_solicitacao(request):
 
     return JsonResponse({'error': 'Método não permitido'}, status=400)
 
+
 @login_required
 @require_POST
 def atualizar_status_solicitacao(request):
@@ -107,6 +111,7 @@ def atualizar_status_solicitacao(request):
     except Solicitacao.DoesNotExist:
         return JsonResponse({'error': 'Solicitação não encontrada'}, status=404)
 
+
 @login_required
 @require_POST
 def marcar_retorno_material(request):
@@ -125,3 +130,14 @@ def marcar_retorno_material(request):
 
     except Solicitacao.DoesNotExist:
         return JsonResponse({'error': 'Solicitação não encontrada'}, status=404)
+
+
+# NOVA VIEW: limpar histórico
+@login_required
+@require_POST
+def limpar_historico_solicitacoes(request):
+    try:
+        Solicitacao.objects.filter(user=request.user).delete()
+        return JsonResponse({'success': True, 'message': 'Histórico limpo com sucesso.'})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

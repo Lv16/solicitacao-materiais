@@ -6,7 +6,7 @@ SECRET_KEY = 'django-insecure-0l+fg!!5ep5ejqivy!3j$&o7#mj%o@be2umd%s%g2#@58*j^gx
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.64', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -70,9 +70,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
