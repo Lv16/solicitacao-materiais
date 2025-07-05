@@ -32,6 +32,36 @@ mensagemNenhum.style.display = "none";
 document.querySelector('.lista_materiais').appendChild(mensagemNenhum);
 
 /* ================================
+    Modal de Carregamento
+================================ */
+const modalLoading = document.createElement('div');
+modalLoading.id = 'modal-loading';
+modalLoading.style.position = 'fixed';
+modalLoading.style.top = '0';
+modalLoading.style.left = '0';
+modalLoading.style.width = '100vw';
+modalLoading.style.height = '100vh';
+modalLoading.style.backgroundColor = 'rgba(0,0,0,0.4)';
+modalLoading.style.display = 'flex';
+modalLoading.style.justifyContent = 'center';
+modalLoading.style.alignItems = 'center';
+modalLoading.style.zIndex = '9999';
+modalLoading.style.fontSize = '1.5rem';
+modalLoading.style.color = 'white';
+modalLoading.style.fontWeight = 'bold';
+modalLoading.style.display = 'none';
+modalLoading.textContent = 'Enviando solicitação...';
+document.body.appendChild(modalLoading);
+
+function mostrarLoading() {
+    modalLoading.style.display = 'flex';
+}
+
+function esconderLoading() {
+    modalLoading.style.display = 'none';
+}
+
+/* ================================
     Modal de Solicitação
 ================================ */
 const modal = document.getElementById('modal-solicitacao');
@@ -64,10 +94,12 @@ window.addEventListener('click', function (e) {
     }
 });
 
-// Envio AJAX do formulário - atualizei para incluir os campos data, supervisor e embarcacao
+// Envio AJAX do formulário - atualizado para mostrar loading e mensagens próprias
 if (formSolicitacao) {
     formSolicitacao.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        mostrarLoading();
 
         const material_id = inputMaterialId.value;
         const quantidade = document.getElementById('input-quantidade').value;
@@ -94,20 +126,52 @@ if (formSolicitacao) {
             },
             body: body
         })
-        .then(response => {
-            if (response.ok) {
+        .then(response => response.json())
+        .then(data => {
+            esconderLoading();
+
+            if (data.success) {
                 fecharModal();
-                alert('Solicitação enviada com sucesso!');
-                window.location.reload();
+                mostrarMensagem('Solicitação enviada com sucesso!', 'success');
+                setTimeout(() => window.location.reload(), 1500);
             } else {
-                alert('Erro ao enviar solicitação.');
+                mostrarMensagem('Erro: ' + (data.error || 'Falha ao enviar solicitação.'), 'error');
             }
         })
         .catch(err => {
+            esconderLoading();
             console.error('Erro no fetch:', err);
-            alert('Erro ao enviar solicitação.');
+            mostrarMensagem('Erro ao enviar solicitação. Tente novamente.', 'error');
         });
     });
+}
+
+/* ================================
+    Mensagem personalizada no topo da tela
+================================ */
+const mensagemContainer = document.createElement('div');
+mensagemContainer.id = 'mensagem-feedback';
+mensagemContainer.style.position = 'fixed';
+mensagemContainer.style.top = '10px';
+mensagemContainer.style.left = '50%';
+mensagemContainer.style.transform = 'translateX(-50%)';
+mensagemContainer.style.padding = '10px 20px';
+mensagemContainer.style.borderRadius = '5px';
+mensagemContainer.style.fontWeight = 'bold';
+mensagemContainer.style.fontSize = '1.2rem';
+mensagemContainer.style.zIndex = '10000';
+mensagemContainer.style.display = 'none';
+document.body.appendChild(mensagemContainer);
+
+function mostrarMensagem(texto, tipo) {
+    mensagemContainer.textContent = texto;
+    mensagemContainer.style.backgroundColor = tipo === 'success' ? '#4caf50' : '#f44336';
+    mensagemContainer.style.color = '#fff';
+    mensagemContainer.style.display = 'block';
+
+    setTimeout(() => {
+        mensagemContainer.style.display = 'none';
+    }, 3000);
 }
 
 /* ================================

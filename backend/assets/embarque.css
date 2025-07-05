@@ -403,6 +403,75 @@ form {
     background-color: #d32f2f;
 }
 
+/* Modal de carregamento */
+#modal-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  font-size: 1.6rem;
+  color: #ffffff;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Container de mensagens de feedback */
+#mensagem-feedback {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  z-index: 10000;
+  display: none;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  animation: fadeInOut 3s ease forwards;
+}
+
+/* Animação para o fade in e out da mensagem */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+/* Feedback de sucesso */
+#mensagem-feedback.success {
+  background-color: #4caf50; /* Verde */
+}
+
+/* Feedback de erro */
+#mensagem-feedback.error {
+  background-color: #f44336; /* Vermelho */
+}
+
+
 footer {
     background-color: #d4ff00;
     color: #212121;

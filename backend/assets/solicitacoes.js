@@ -52,11 +52,63 @@ function filtrarCards(status, termo) {
     });
 }
 
+/* Criar modal loading e container de mensagens */
+const modalLoading = document.createElement('div');
+modalLoading.id = 'modal-loading';
+modalLoading.style.position = 'fixed';
+modalLoading.style.top = '0';
+modalLoading.style.left = '0';
+modalLoading.style.width = '100vw';
+modalLoading.style.height = '100vh';
+modalLoading.style.backgroundColor = 'rgba(0,0,0,0.4)';
+modalLoading.style.display = 'flex';
+modalLoading.style.justifyContent = 'center';
+modalLoading.style.alignItems = 'center';
+modalLoading.style.zIndex = '9999';
+modalLoading.style.fontSize = '1.5rem';
+modalLoading.style.color = 'white';
+modalLoading.style.fontWeight = 'bold';
+modalLoading.style.display = 'none';
+modalLoading.textContent = 'Aguarde...';
+document.body.appendChild(modalLoading);
+
+function mostrarLoading() {
+    modalLoading.style.display = 'flex';
+}
+
+function esconderLoading() {
+    modalLoading.style.display = 'none';
+}
+
+const mensagemContainer = document.createElement('div');
+mensagemContainer.id = 'mensagem-feedback';
+mensagemContainer.style.position = 'fixed';
+mensagemContainer.style.top = '10px';
+mensagemContainer.style.left = '50%';
+mensagemContainer.style.transform = 'translateX(-50%)';
+mensagemContainer.style.padding = '10px 20px';
+mensagemContainer.style.borderRadius = '5px';
+mensagemContainer.style.fontWeight = 'bold';
+mensagemContainer.style.fontSize = '1.2rem';
+mensagemContainer.style.zIndex = '10000';
+mensagemContainer.style.display = 'none';
+mensagemContainer.style.color = '#fff';
+document.body.appendChild(mensagemContainer);
+
+function mostrarMensagem(texto, tipo = 'success') {
+    mensagemContainer.textContent = texto;
+    mensagemContainer.style.backgroundColor = tipo === 'success' ? '#4caf50' : '#f44336';
+    mensagemContainer.style.display = 'block';
+    setTimeout(() => {
+        mensagemContainer.style.display = 'none';
+    }, 3000);
+}
+
 /* Logout */
 const logoutBtn = document.querySelector('.logout-btn');
 if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
-        alert('Você saiu!');
+        mostrarMensagem('Você saiu!', 'success');
         // window.location.href = 'login.html';
     });
 }
@@ -79,6 +131,8 @@ function getCookie(name) {
 
 /* Função para atualizar o status da solicitação via AJAX */
 function atualizarStatus(id, novoStatus) {
+    mostrarLoading();
+
     fetch("/solicitacoes/atualizar-status/", {
         method: "POST",
         headers: {
@@ -87,23 +141,28 @@ function atualizarStatus(id, novoStatus) {
         },
         body: `id=${id}&status=${novoStatus}`
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("Status atualizado para: " + data.status);
-                location.reload();
-            } else {
-                alert("Erro ao atualizar: " + data.error);
-            }
-        })
-        .catch(error => {
-            alert("Erro na requisição");
-            console.error(error);
-        });
+    .then(response => response.json())
+    .then(data => {
+        esconderLoading();
+
+        if (data.success) {
+            mostrarMensagem("Status atualizado para: " + data.status, 'success');
+            setTimeout(() => location.reload(), 1500);
+        } else {
+            mostrarMensagem("Erro ao atualizar: " + data.error, 'error');
+        }
+    })
+    .catch(error => {
+        esconderLoading();
+        mostrarMensagem("Erro na requisição", 'error');
+        console.error(error);
+    });
 }
 
 /* Função para marcar o retorno do material */
 function marcarComoRetornado(id) {
+    mostrarLoading();
+
     fetch("/solicitacoes/marcar-retorno/", {
         method: "POST",
         headers: {
@@ -112,26 +171,31 @@ function marcarComoRetornado(id) {
         },
         body: `id=${id}`
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert(data.message);
-                location.reload();
-            } else {
-                alert("Erro: " + data.error);
-            }
-        })
-        .catch(error => {
-            alert("Erro na requisição");
-            console.error(error);
-        });
+    .then(response => response.json())
+    .then(data => {
+        esconderLoading();
+
+        if (data.success) {
+            mostrarMensagem(data.message, 'success');
+            setTimeout(() => location.reload(), 1500);
+        } else {
+            mostrarMensagem("Erro: " + data.error, 'error');
+        }
+    })
+    .catch(error => {
+        esconderLoading();
+        mostrarMensagem("Erro na requisição", 'error');
+        console.error(error);
+    });
 }
 
-/* NOVA: Função para limpar o histórico após confirmação */
+/* Função para limpar o histórico após confirmação */
 function limparHistorico() {
     if (!confirm("Tem certeza que deseja apagar todo o histórico de solicitações?")) {
         return;
     }
+
+    mostrarLoading();
 
     fetch("/solicitacoes/limpar/", {
         method: "POST",
@@ -140,17 +204,20 @@ function limparHistorico() {
             "X-CSRFToken": getCookie('csrftoken')
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("Histórico limpo com sucesso!");
-                location.reload();
-            } else {
-                alert("Erro ao limpar histórico: " + data.error);
-            }
-        })
-        .catch(error => {
-            alert("Erro na requisição");
-            console.error(error);
-        });
+    .then(response => response.json())
+    .then(data => {
+        esconderLoading();
+
+        if (data.success) {
+            mostrarMensagem("Histórico limpo com sucesso!", 'success');
+            setTimeout(() => location.reload(), 1500);
+        } else {
+            mostrarMensagem("Erro ao limpar histórico: " + data.error, 'error');
+        }
+    })
+    .catch(error => {
+        esconderLoading();
+        mostrarMensagem("Erro na requisição", 'error');
+        console.error(error);
+    });
 }
