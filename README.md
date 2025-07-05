@@ -7,13 +7,14 @@ Projeto de Front-End desenvolvido para controle e solicitação de materiais par
 - HTML5
 - CSS3
 - JavaScript (Vanilla)
-- Django (Back-end será integrado posteriormente)
+- Django
 
 ## 🎯 Funcionalidades
 
 - 📦 Visualizar materiais disponíveis
 - 📝 Realizar solicitações de materiais
 - 🔍 Consultar solicitações feitas
+- ✅ Envio de e-mail após a realização de uma solicitação de material
 - 🗂️ Filtros por status (Em andamento, Concluído, Todos)
 - 🔐 Menu de usuário com opção de logout
 
