@@ -1,4 +1,4 @@
-# 🚢 Sistema de Solicitação de Materiais para Embarcação
+# 🚢 Sistema de Solicitação de Materiais para Embarque
 
 Projeto de Front-End desenvolvido para controle e solicitação de materiais para embarcações.
 
