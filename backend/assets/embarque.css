@@ -229,6 +229,7 @@ form {
     padding: 10px;
     width: 60%;
     margin: auto;
+    gap: 10px;
 }
 
 .lista_materiais > div {
@@ -275,9 +276,6 @@ form {
     color: white;
 }
 
-/* ==============================
-        Estoque
-============================== */
 .badge {
     padding: 5px 10px;
     border-radius: 8px;
@@ -288,10 +286,6 @@ form {
     display: inline-block;
 }
 
-/* ==============================
-        Modal
-============================== */
-/* ===== Modal (Fundo) ===== */
 .modal {
     display: none;
     position: fixed;
@@ -306,7 +300,6 @@ form {
     
 }
 
-/* ===== Modal Conteúdo ===== */
 .modal-content {
     background-color: rgb(255, 255, 255);
     margin: auto;
@@ -317,7 +310,7 @@ form {
     
 }
 
-/* ===== Botão Fechar (X) ===== */
+
 .close-btn {
     color: #212121;
     float: right;
@@ -330,7 +323,7 @@ form {
     color: red;
 }
 
-/* ===== Título ===== */
+
 .modal-content h2 {
     margin-top: 0;
     margin-bottom: 10px;
@@ -338,8 +331,6 @@ form {
     font-size: 1.3em;
     font-weight: bold;
 }
-
-/* ===== Texto de Itens, etc. ===== */
 
 .modal-content > form {
     margin: 10px auto;
@@ -363,7 +354,7 @@ form {
     font-size: 13.5px; 
 }
 
-/* ===== Botões ===== */
+
 .botoes-modal {
     display: flex;
     justify-content: space-between;
@@ -403,7 +394,7 @@ form {
     background-color: #d32f2f;
 }
 
-/* Modal de carregamento */
+
 #modal-loading {
   position: fixed;
   top: 0;
@@ -423,7 +414,7 @@ form {
   user-select: none;
 }
 
-/* Container de mensagens de feedback */
+
 #mensagem-feedback {
   position: fixed;
   top: 10px;
@@ -441,7 +432,6 @@ form {
   animation: fadeInOut 3s ease forwards;
 }
 
-/* Animação para o fade in e out da mensagem */
 @keyframes fadeInOut {
   0% {
     opacity: 0;
@@ -461,14 +451,14 @@ form {
   }
 }
 
-/* Feedback de sucesso */
+
 #mensagem-feedback.success {
-  background-color: #4caf50; /* Verde */
+  background-color: #4caf50; 
 }
 
-/* Feedback de erro */
+
 #mensagem-feedback.error {
-  background-color: #f44336; /* Vermelho */
+  background-color: #f44336; 
 }
 
 
@@ -482,15 +472,15 @@ footer {
     white-space: nowrap;
 }
 
-
-/* ==============================
-   Responsividade
-============================== */
 /* ========== Tablets (até 1024px) ========== */
 @media (max-width: 1024px) {
+    html,body {
+        overflow-x: hidden;
+    }
+    
     header .nuvem {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
     }
 
@@ -509,10 +499,15 @@ footer {
         justify-content: flex-end;
         width: 100%;
     }
+    
 }
 
-/* ========== Celular intermediario (até 768px) ========== */
+/* Celular intermediario (até 768px) */
 @media (max-width: 768px) {
+
+    html, body {
+        overflow-x: hidden;
+    }
     header .nuvem {
         flex-direction: column;
         align-items: center;
@@ -559,7 +554,9 @@ footer {
     }
 
     .modal-content {
-        width: 90%;
+        width: 80%;
+        margin: auto;
+        align-items: center;
         padding: 20px;
     }
 
@@ -571,6 +568,14 @@ footer {
     .logout-btn {
         padding: 8px 12px;
     }
+    .lista_materiais {
+        display: inline-block;
+        width: 100%;
+        height: auto;
+        gap: 10px;
+        
+    }
+    
     footer {
         padding: 5px 0;
         font-size: 0.8em;
@@ -578,8 +583,13 @@ footer {
     }
 }
 
-/* ========== J7 DA SUAYANE (até 480px) ========== */
+/*J7 DA SUAYANE (até 480px) */
 @media (max-width: 480px) {
+    
+    html,body {
+        overflow-x: hidden;
+    }
+    
     header h1 {
         font-size: 1.1em;
     }
