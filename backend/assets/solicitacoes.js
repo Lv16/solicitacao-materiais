@@ -1,4 +1,4 @@
-/* Menu dropdown */
+
 function toggleMenu() {
     const menu = document.getElementById('dropdown');
     menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
@@ -12,7 +12,7 @@ window.addEventListener('click', function (e) {
     }
 });
 
-/* Filtros e Busca */
+
 const botoesFiltro = document.querySelectorAll('.filtro');
 const cards = document.querySelectorAll('.card-solicitacao');
 const inputPesquisa = document.getElementById('pesquisa');
@@ -21,11 +21,11 @@ botoesFiltro.forEach(botao => {
     botao.addEventListener('click', () => {
         const status = botao.getAttribute('data-status');
 
-        // Destacar botão ativo
+      
         botoesFiltro.forEach(b => b.classList.remove('ativo'));
         botao.classList.add('ativo');
 
-        // Filtrar cards
+        
         filtrarCards(status, inputPesquisa.value.trim().toLowerCase());
     });
 });
@@ -52,7 +52,7 @@ function filtrarCards(status, termo) {
     });
 }
 
-/* Criar modal loading e container de mensagens */
+
 const modalLoading = document.createElement('div');
 modalLoading.id = 'modal-loading';
 modalLoading.style.position = 'fixed';
@@ -104,16 +104,15 @@ function mostrarMensagem(texto, tipo = 'success') {
     }, 3000);
 }
 
-/* Logout */
+
 const logoutBtn = document.querySelector('.logout-btn');
 if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
         mostrarMensagem('Você saiu!', 'success');
-        // window.location.href = 'login.html';
     });
 }
 
-/* Função para pegar o token CSRF do cookie */
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -129,7 +128,6 @@ function getCookie(name) {
     return cookieValue;
 }
 
-/* Função para atualizar o status da solicitação via AJAX */
 function atualizarStatus(id, novoStatus) {
     mostrarLoading();
 
@@ -159,7 +157,6 @@ function atualizarStatus(id, novoStatus) {
     });
 }
 
-/* Função para marcar o retorno do material */
 function marcarComoRetornado(id) {
     mostrarLoading();
 
@@ -189,7 +186,6 @@ function marcarComoRetornado(id) {
     });
 }
 
-/* Função para limpar o histórico após confirmação */
 function limparHistorico() {
     if (!confirm("Tem certeza que deseja apagar todo o histórico de solicitações?")) {
         return;

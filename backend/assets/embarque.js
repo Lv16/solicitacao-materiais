@@ -232,6 +232,5 @@ const logoutBtn = document.querySelector('.logout-btn');
 if (logoutBtn) {
     logoutBtn.addEventListener('click', function () {
         alert('Você saiu!');
-        // window.location.href = 'login.html'; // Ativar se desejar redirecionar
     });
 }

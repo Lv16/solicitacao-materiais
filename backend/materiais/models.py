@@ -26,12 +26,12 @@ class Solicitacao(models.Model):
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='andamento')
 
-    # Campos extras
+   
     data = models.DateField(null=True, blank=True)
     supervisor = models.CharField(max_length=100, blank=True)
     embarcacao = models.CharField(max_length=100, blank=True)
 
-    # Campos que o coordenador pode marcar
+    
     concluida = models.BooleanField(default=False)        # Marca se a operação foi concluída
     retornado_base = models.BooleanField(default=False)   # Marca se o material retornou para a base
 

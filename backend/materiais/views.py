@@ -132,7 +132,6 @@ def marcar_retorno_material(request):
         return JsonResponse({'error': 'Solicitação não encontrada'}, status=404)
 
 
-# NOVA VIEW: limpar histórico
 @login_required
 @require_POST
 def limpar_historico_solicitacoes(request):

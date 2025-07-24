@@ -59,6 +59,7 @@
                 <p><strong>Embarcação:</strong> {{ solicitacao.embarcacao|default:"-" }}</p>
                 <p><strong>Data:</strong> {{ solicitacao.data|date:"d/m/Y" }}</p>
                 <p><strong>Supervisor:</strong> {{ solicitacao.supervisor|default:"-" }}</p>
+                <p><strong>CPF:</strong> {{ solicitacao.cpf|default:"-" }}</p>
                 <p><strong>Status:</strong>
                     <span
                         class="badge {% if solicitacao.status == 'concluido' %}concluido{% else %}andamento{% endif %}">
@@ -78,7 +79,7 @@
         <script src="{% static 'solicitacoes.js' %}"></script>
     </main>
     <footer>
-        <p>© 2023 Ambipar Group. Todos os direitos reservados.</p>
+        <p>© 2025 Ambipar Group. Todos os direitos reservados.</p>
     </footer>
 </body>
 
