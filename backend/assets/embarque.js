@@ -118,7 +118,7 @@ if (formSolicitacao) {
             `data=${encodeURIComponent(data)}&` +
             `supervisor=${encodeURIComponent(supervisor)}&` +
             `embarcacao=${encodeURIComponent(embarcacao)}&`+
-            `cpf=${encodeURIComponent}(cpf)`;
+            `cpf=${encodeURIComponent(cpf)}`;
 
         fetch('/solicitacoes/nova/', {
             method: 'POST',
@@ -167,7 +167,7 @@ document.body.appendChild(mensagemContainer);
 
 function mostrarMensagem(texto, tipo) {
     mensagemContainer.textContent = texto;
-    mensagemContainer.style.backgroundColor = tipo === 'success' ? '#4caf50' : '#f44336';
+    mensagemContainer.style.backgroundColor = tipo === 'success' ? '#B2CC21' : '#f44336';
     mensagemContainer.style.color = '#fff';
     mensagemContainer.style.display = 'block';
 

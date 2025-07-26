@@ -97,7 +97,7 @@ document.body.appendChild(mensagemContainer);
 
 function mostrarMensagem(texto, tipo = 'success') {
     mensagemContainer.textContent = texto;
-    mensagemContainer.style.backgroundColor = tipo === 'success' ? '#4caf50' : '#f44336';
+    mensagemContainer.style.backgroundColor = tipo === 'success' ? '#B2CC21' : '#f44336';
     mensagemContainer.style.display = 'block';
     setTimeout(() => {
         mensagemContainer.style.display = 'none';
