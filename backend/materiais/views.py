@@ -33,6 +33,7 @@ def cria_solicitacao(request):
         data_embarque = request.POST.get('data')
         supervisor = request.POST.get('supervisor', '')
         embarcacao = request.POST.get('embarcacao', '')
+        cpf = request.POST.get('cpf', '')
 
         try:
             material = Material.objects.get(id=material_id)
@@ -51,6 +52,7 @@ def cria_solicitacao(request):
             data=data_embarque if data_embarque else None,
             supervisor=supervisor,
             embarcacao=embarcacao,
+            cpf=cpf,
         )
 
         material.quantidade -= quantidade
@@ -64,6 +66,7 @@ def cria_solicitacao(request):
             f"Detalhes:\n"
             f"- Embarcação: {solicitacao.embarcacao}\n"
             f"- Supervisor: {solicitacao.supervisor}\n"
+            f"- cpf: {solicitacao.cpf}\n"
             f"- Data de embarque: {solicitacao.data}\n\n"
             "Obrigado."
         )

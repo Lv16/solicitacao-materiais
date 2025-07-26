@@ -30,6 +30,7 @@ class Solicitacao(models.Model):
     data = models.DateField(null=True, blank=True)
     supervisor = models.CharField(max_length=100, blank=True)
     embarcacao = models.CharField(max_length=100, blank=True)
+    cpf = models.CharField(max_length=100, blank=True)
 
     
     concluida = models.BooleanField(default=False)        # Marca se a operação foi concluída

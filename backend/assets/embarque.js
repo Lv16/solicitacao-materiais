@@ -107,6 +107,7 @@ if (formSolicitacao) {
         const data = document.getElementById('input-data').value;
         const supervisor = document.getElementById('input-supervisor').value;
         const embarcacao = document.getElementById('input-embarcacao').value;
+        const cpf = document.getElementById ('input-cpf').value;
         const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
         // Monta o corpo da requisição com encodeURIComponent para evitar erros com caracteres especiais
@@ -116,7 +117,8 @@ if (formSolicitacao) {
             `observacao=${encodeURIComponent(observacao)}&` +
             `data=${encodeURIComponent(data)}&` +
             `supervisor=${encodeURIComponent(supervisor)}&` +
-            `embarcacao=${encodeURIComponent(embarcacao)}`;
+            `embarcacao=${encodeURIComponent(embarcacao)}&`+
+            `cpf=${encodeURIComponent}(cpf)`;
 
         fetch('/solicitacoes/nova/', {
             method: 'POST',
