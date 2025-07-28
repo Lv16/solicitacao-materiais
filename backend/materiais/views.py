@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import json
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.core.mail import send_mail
@@ -6,6 +7,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .models import Material, Solicitacao
+import traceback
 
 
 @login_required
@@ -139,7 +141,33 @@ def marcar_retorno_material(request):
 @require_POST
 def limpar_historico_solicitacoes(request):
     try:
-        Solicitacao.objects.filter(user=request.user).delete()
-        return JsonResponse({'success': True, 'message': 'Histórico limpo com sucesso.'})
+        body = json.loads(request.body)
+        print("BODY:", body)
+
+        ids_brutos = body.get('ids', [])
+        ids = []
+
+        for i in ids_brutos:
+            try:
+                ids.append(int(i))
+            except (TypeError, ValueError):
+                continue
+
+        if not ids:
+            return JsonResponse({'success': False, 'error': 'Nenhuma solicitação informada.'}, status=400)
+
+        solicitacoes_para_apagar = Solicitacao.objects.filter(
+            id__in=ids,
+            status__in=['concluido', 'cancelado']
+        )
+
+        deletadas = solicitacoes_para_apagar.count()
+        solicitacoes_para_apagar.delete()
+
+        return JsonResponse({'success': True, 'message': f'{deletadas} solicitações apagadas com sucesso.'})
+
+    except json.JSONDecodeError:
+        return JsonResponse({'success': False, 'error': 'Formato de dados inválido.'}, status=400)
     except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+        traceback.print_exc()
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)

@@ -223,18 +223,8 @@ a {
 .badge {
     padding: 2px 8px;
     border-radius: 12px;
-    color: white;
-    font-size: 12px;
+    color: black;
 }
-
-.andamento {
-    background-color: var(--cor8);
-}
-
-.concluido {
-    background-color: var(--cor1);
-}
-
 
 /* ==============================
    Botões dos Cards

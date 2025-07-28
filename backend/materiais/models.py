@@ -17,6 +17,12 @@ class Solicitacao(models.Model):
         ('cancelado', 'Cancelado'),
     ]
 
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='andamento',
+    )
+
     material = models.ForeignKey(Material, on_delete=models.CASCADE, related_name='solicitacoes')
     quantidade = models.PositiveIntegerField()
     solicitante = models.CharField(max_length=100)

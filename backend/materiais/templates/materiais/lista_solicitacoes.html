@@ -11,7 +11,6 @@
 </head>
 
 <body>
-    <!-- Token CSRF oculto para JavaScript -->
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
 
     <header>
@@ -54,7 +53,7 @@
         </div>
         <div class="lista-solicitacoes">
             {% for solicitacao in solicitacoes %}
-            <div class="card-solicitacao" data-status="{{ solicitacao.status|default:'andamento' }}">
+            <div class="card-solicitacao" data-id="{{ solicitacao.id}}" data-status="{{ solicitacao.status|default:'andamento' }}">
                 <h3>{{ solicitacao.material.nome }}</h3>
                 <p><strong>Embarcação:</strong> {{ solicitacao.embarcacao|default:"-" }}</p>
                 <p><strong>Data:</strong> {{ solicitacao.data|date:"d/m/Y" }}</p>

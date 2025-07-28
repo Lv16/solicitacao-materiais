@@ -1,4 +1,3 @@
-
 function toggleMenu() {
     const menu = document.getElementById('dropdown');
     menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
@@ -187,7 +186,29 @@ function marcarComoRetornado(id) {
 }
 
 function limparHistorico() {
-    if (!confirm("Tem certeza que deseja apagar todo o histórico de solicitações?")) {
+    if (!confirm("Tem certeza que deseja apagar todas as solicitações concluídas ou canceladas?")) {
+        return;
+    }
+
+    const solicitacoes = document.querySelectorAll("[data-status]");
+    const idsParaExcluir = [];
+
+    solicitacoes.forEach(el => {
+        const status = el.getAttribute("data-status");
+        const id = el.getAttribute("data-id");
+        const statusNormalized = status ? status.toLowerCase().trim() : "";
+
+        console.log(`Encontrado: ID=${id}, status=${statusNormalized}`);
+
+        if (statusNormalized === "concluido" || statusNormalized === "cancelado") {
+            idsParaExcluir.push(id);
+        }
+    });
+
+    console.log("IDs para excluir:", idsParaExcluir);
+
+    if (idsParaExcluir.length === 0) {
+        mostrarMensagem("Não há solicitações concluídas ou canceladas para apagar.", 'info');
         return;
     }
 
@@ -196,24 +217,35 @@ function limparHistorico() {
     fetch("/solicitacoes/limpar/", {
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "X-CSRFToken": getCookie('csrftoken')
-        }
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({ ids: idsParaExcluir })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+        return response.json();
+    })
     .then(data => {
         esconderLoading();
 
         if (data.success) {
-            mostrarMensagem("Histórico limpo com sucesso!", 'success');
+            mostrarMensagem("Solicitações removidas com sucesso!", 'success');
             setTimeout(() => location.reload(), 1500);
         } else {
-            mostrarMensagem("Erro ao limpar histórico: " + data.error, 'error');
+            mostrarMensagem("Erro ao remover solicitações: " + data.error, 'error');
         }
     })
     .catch(error => {
         esconderLoading();
-        mostrarMensagem("Erro na requisição", 'error');
+        mostrarMensagem("Erro na requisição: " + error.message, 'error');
         console.error(error);
     });
+
+    function getCSRFToken() {
+        return document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+    }
 }
+
+
+
