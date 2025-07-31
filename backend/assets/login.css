@@ -92,12 +92,23 @@ button:hover {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 468px) {
     html, body {
         background: linear-gradient(to bottom, rgb(52, 52, 52) 23%, #000000 91%);
     }
     .login-box {
         height: 40%;
+        width: 80%;
+    }
+}
+
+@media (max-width: 360px) {
+    html, body {
+        background: linear-gradient(to bottom, rgb(52, 52, 52) 23%, #000000 91%);
+    }
+
+    .login-box {
+        height: 50%;
         width: 80%;
     }
 }

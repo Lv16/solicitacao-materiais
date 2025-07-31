@@ -234,9 +234,7 @@ form {
 }
 
 
-/* ==============================
-        Materiais
-============================== */
+/* Materiais */
 .lista_materiais {
     display: flex;
     padding: 10px;
@@ -484,7 +482,7 @@ footer {
     white-space: nowrap;
 }
 
-/* ========== Tablets (até 1024px) ========== */
+/*Tablets */
 @media (max-width: 1024px) {
     html,body {
         overflow-x: hidden;
@@ -523,7 +521,7 @@ footer {
     
 }
 
-/* Celular intermediario (até 768px) */
+/* Celular intermediario */
 @media (max-width: 768px) {
 
     html, body {
@@ -602,7 +600,7 @@ footer {
     }
 }
 
-/*J7 DA SUAYANE (até 480px) */
+/*J7 DA Suyane */
 @media (max-width: 480px) {
     
     html,body {

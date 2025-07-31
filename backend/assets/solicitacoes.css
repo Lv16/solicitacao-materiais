@@ -154,9 +154,7 @@ a {
     box-shadow: 2px 2px 0px rgba(121, 6, 6, 0.856);;
 }
 
-/* ==============================
-   Filtro e Busca
-============================== */
+/*Filtro e Busca*/
 .container-solicitacoes {
     padding: 20px;
     text-align: center;
@@ -194,9 +192,7 @@ a {
 }
 
 
-/* ==============================
-   Cards de Solicitações
-============================== */
+/*Cards de equipamentos solicitados*/
 .lista-solicitacoes {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -226,9 +222,7 @@ a {
     color: black;
 }
 
-/* ==============================
-   Botões dos Cards
-============================== */
+/*Botões dos Cards*/
 .botoes-card {
     margin-top: 10px;
     display: flex;
@@ -262,9 +256,7 @@ a {
 }
 
 
-/* ==============================
-   Esconder Elementos
-============================== */
+/*Esconder Elementos*/
 .escondido {
     display: none !important;
 }
@@ -279,19 +271,14 @@ footer {
     white-space: nowrap;
 }
 
-
-/* ==============================
-   Responsividade
-============================== */
-
-/* Telas Grandes (Desktops) */
+/* Computadores Desktops */
 @media (min-width: 1200px) {
     .nuvem {
         max-width: 1100px;
     }
 }
 
-/* Telas Intermediárias */
+/* Tablets */
 @media (max-width: 1024px) {
     header .nuvem {
         max-width: 80%;
@@ -327,7 +314,7 @@ footer {
     }
 }
 
-/* Telas Pequenas (Celulares) */
+/*Smartphones em geral*/
 @media (max-width: 768px) {
     header .nuvem {
             flex-direction: column;

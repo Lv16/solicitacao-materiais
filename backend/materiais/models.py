@@ -5,7 +5,7 @@ class Material(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField(blank=True)
     quantidade = models.PositiveIntegerField(default=0)
-    embarcado = models.BooleanField(default=False)  # Indica se o material está embarcado
+    embarcado = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nome
@@ -39,8 +39,8 @@ class Solicitacao(models.Model):
     cpf = models.CharField(max_length=100, blank=True)
 
     
-    concluida = models.BooleanField(default=False)        # Marca se a operação foi concluída
-    retornado_base = models.BooleanField(default=False)   # Marca se o material retornou para a base
+    concluida = models.BooleanField(default=False)
+    retornado_base = models.BooleanField(default=False)  
 
     def __str__(self):
         return f"{self.solicitante} - {self.material.nome} ({self.quantidade})"

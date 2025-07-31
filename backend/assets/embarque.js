@@ -1,6 +1,4 @@
-/* ================================
-    Menu de usuário (abrir/fechar)
-================================ */
+/*Botão de Logout*/
 function toggleMenu() {
     const menu = document.getElementById('dropdown');
     menu.classList.toggle('active');
@@ -15,9 +13,7 @@ window.addEventListener('click', function (e) {
     }
 });
 
-/* ================================
-    Seletores principais
-================================ */
+/*Botões principais*/
 const selectTipo = document.getElementById('tipo');
 const inputPesquisa = document.querySelector('.pesquisar');
 const btnPesquisa = document.querySelector('.btn-pesquisar');
@@ -31,9 +27,7 @@ mensagemNenhum.style.fontWeight = "bold";
 mensagemNenhum.style.display = "none";
 document.querySelector('.lista_materiais').appendChild(mensagemNenhum);
 
-/* ================================
-    Modal de Carregamento
-================================ */
+/* Modal de Carregamento*/
 const modalLoading = document.createElement('div');
 modalLoading.id = 'modal-loading';
 modalLoading.style.position = 'fixed';
@@ -61,9 +55,7 @@ function esconderLoading() {
     modalLoading.style.display = 'none';
 }
 
-/* ================================
-    Modal de Solicitação
-================================ */
+/* Modal de Solicitação*/
 const modal = document.getElementById('modal-solicitacao');
 const modalEquipamento = document.getElementById('modal-equipamento');
 const btnFecharModal = document.querySelector('.close-btn');
@@ -71,7 +63,7 @@ const btnCancelar = document.querySelector('.btn-cancelar');
 const formSolicitacao = document.getElementById('form-solicitacao');
 const inputMaterialId = document.getElementById('input-material-id');
 
-// Abrir modal e preencher dados
+// Pop-Up preenchimento dos dados
 document.querySelectorAll('.btn-solicitar').forEach(btn => {
     btn.addEventListener('click', function () {
         modal.style.display = 'block';
@@ -94,7 +86,7 @@ window.addEventListener('click', function (e) {
     }
 });
 
-// Envio AJAX do formulário - atualizado para mostrar loading e mensagens próprias
+// Envio do formulário
 if (formSolicitacao) {
     formSolicitacao.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -110,7 +102,6 @@ if (formSolicitacao) {
         const cpf = document.getElementById ('input-cpf').value;
         const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-        // Monta o corpo da requisição com encodeURIComponent para evitar erros com caracteres especiais
         const body = 
             `material_id=${encodeURIComponent(material_id)}&` +
             `quantidade=${encodeURIComponent(quantidade)}&` +
@@ -148,9 +139,7 @@ if (formSolicitacao) {
     });
 }
 
-/* ================================
-    Mensagem personalizada no topo da tela
-================================ */
+/* Mensagem personalizada no topo da tela*/
 const mensagemContainer = document.createElement('div');
 mensagemContainer.id = 'mensagem-feedback';
 mensagemContainer.style.position = 'fixed';
@@ -176,9 +165,7 @@ function mostrarMensagem(texto, tipo) {
     }, 3000);
 }
 
-/* ================================
-    Filtro de busca e tipo
-================================ */
+/* Filtros de buscar*/
 function filtrarMateriais(termo) {
     let encontrou = false;
 
@@ -226,9 +213,6 @@ if (btnLimpar) {
     });
 }
 
-/* ================================
-    Logout
-================================ */
 const logoutBtn = document.querySelector('.logout-btn');
 
 if (logoutBtn) {

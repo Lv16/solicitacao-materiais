@@ -60,7 +60,7 @@ def cria_solicitacao(request):
         material.quantidade -= quantidade
         material.save()
 
-        # Envia e-mail para solicitante e para o responsável
+        # Envia e-mail para quem solicitou e o TI responsável
         assunto = 'Confirmação de Solicitação de Material'
         mensagem = (
             f"Olá {solicitacao.solicitante},\n\n"
